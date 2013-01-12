@@ -1,2 +1,5 @@
 2013-01-11 15:10:32.570 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
 2013-01-11 15:11:06.852 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-11 19:42:17.066 [warning] <0.69.0> OS_MON (memsup) timeout, no data collected
+
+2013-01-11 23:40:11.988 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.62.0> [{name,timer_server},{initial_call,{timer,init,1}},{almost_current_function,{gen_server,loop,6}},{message_queue_len,0}] [{timeout,174},{old_heap_block_size,0},{heap_block_size,233},{mbuf_size,0},{stack_size,19},{old_heap_size,0},{heap_size,46}]
