@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: api2_dev
+  pool: 5
+  username: jmoscat
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: api2_test
+  pool: 5
+  username: jmoscat
+  password:

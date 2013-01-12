@@ -1,0 +1,2 @@
+2013-01-11 15:10:32.570 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-11 15:11:06.858 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
