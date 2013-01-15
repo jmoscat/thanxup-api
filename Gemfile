@@ -36,8 +36,7 @@ gem 'memcached'
 gem 'bootstrap-datepicker-rails'
 
 #Riak
-#gem 'ripple', '~> 1.0.0.beta2'
-#gem "riak-client"
+gem 'ripple', '~> 1.0.0.beta2'
 
 #Social Media gems
 gem 'twitter-text'

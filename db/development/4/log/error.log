@@ -1,0 +1,2 @@
+2013-01-15 10:53:09.881 [error] <0.69.0> gen_server memsup terminated with reason: no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762
+2013-01-15 10:53:09.932 [error] <0.69.0> CRASH REPORT Process memsup with 0 neighbours exited with reason: no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762 in gen_server:terminate/6 line 747

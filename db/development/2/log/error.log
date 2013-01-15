@@ -1,0 +1,7 @@
+2013-01-15 10:53:28.072 [error] emulator Error in process <0.3103.0> on node 'riak804584@127.0.0.1' with exit value: {{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]}
+
+
+2013-01-15 10:53:28.083 [error] <0.69.0> gen_server memsup terminated with reason: no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762
+2013-01-15 10:53:28.091 [error] <0.69.0> CRASH REPORT Process memsup with 0 neighbours exited with reason: no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762 in gen_server:terminate/6 line 747
+2013-01-15 10:53:28.096 [error] <0.67.0> Supervisor os_mon_sup had child memsup started with memsup:start_link() at <0.69.0> exit with reason no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762 in context child_terminated
+2013-01-15 10:53:28.098 [error] <0.3105.0> gen_server memsup terminated with reason: no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762

@@ -1,0 +1,116 @@
+2013-01-15 10:32:28.344 [info] <0.7.0> Application lager started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:28.412 [warning] <0.149.0>@riak_core_ring_manager:reload_ring:231 No ring file available.
+2013-01-15 10:32:28.505 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_core,vnode_routing} = proxy
+2013-01-15 10:32:28.510 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_core,staged_joins} = true
+2013-01-15 10:32:28.515 [info] <0.7.0> Application riak_core started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:28.542 [info] <0.262.0>@riak_core:wait_for_application:425 Waiting for application riak_pipe to start (0 seconds).
+2013-01-15 10:32:28.543 [info] <0.7.0> Application riak_pipe started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:28.575 [info] <0.271.0>@riak_core:wait_for_service:445 Waiting for service riak_kv to start (0 seconds)
+2013-01-15 10:32:28.609 [info] <0.283.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.283.0>)
+2013-01-15 10:32:28.612 [info] <0.284.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.284.0>)
+2013-01-15 10:32:28.615 [info] <0.285.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.285.0>)
+2013-01-15 10:32:28.618 [info] <0.286.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.286.0>)
+2013-01-15 10:32:28.622 [info] <0.287.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.287.0>)
+2013-01-15 10:32:28.625 [info] <0.288.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.288.0>)
+2013-01-15 10:32:28.628 [info] <0.289.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.289.0>)
+2013-01-15 10:32:28.633 [info] <0.290.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.290.0>)
+2013-01-15 10:32:28.638 [info] <0.292.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.292.0>)
+2013-01-15 10:32:28.641 [info] <0.293.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.293.0>)
+2013-01-15 10:32:28.644 [info] <0.262.0>@riak_core:wait_for_application:419 Wait complete for application riak_pipe (0 seconds)
+2013-01-15 10:32:28.645 [info] <0.294.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.294.0>)
+2013-01-15 10:32:28.656 [info] <0.295.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.295.0>)
+2013-01-15 10:32:28.662 [info] <0.296.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.296.0>)
+2013-01-15 10:32:28.669 [info] <0.317.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.317.0>)
+2013-01-15 10:32:28.672 [info] <0.427.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_hook) host starting (<0.427.0>)
+2013-01-15 10:32:28.675 [info] <0.428.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_hook) host starting (<0.428.0>)
+2013-01-15 10:32:29.069 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,vnode_vclocks} = true
+2013-01-15 10:32:29.080 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,legacy_keylisting} = false
+2013-01-15 10:32:29.093 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,listkeys_backpressure} = true
+2013-01-15 10:32:29.100 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,mapred_system} = pipe
+2013-01-15 10:32:29.108 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,mapred_2i_pipe} = true
+2013-01-15 10:32:29.142 [info] <0.524.0>@riak_core:wait_for_application:425 Waiting for application riak_kv to start (0 seconds).
+2013-01-15 10:32:29.160 [info] <0.7.0> Application riak_kv started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:29.197 [info] <0.7.0> Application merge_index started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:29.200 [info] <0.537.0>@riak_core:wait_for_service:445 Waiting for service riak_kv to start (0 seconds)
+2013-01-15 10:32:29.255 [info] <0.524.0>@riak_core:wait_for_application:419 Wait complete for application riak_kv (0 seconds)
+2013-01-15 10:32:29.596 [info] <0.271.0>@riak_core:wait_for_service:439 Wait complete for service riak_kv (1 seconds)
+2013-01-15 10:32:29.605 [info] <0.537.0>@riak_core:wait_for_service:439 Wait complete for service riak_kv (0 seconds)
+2013-01-15 10:32:29.634 [info] <0.1578.0>@riak_core:wait_for_application:425 Waiting for application riak_search to start (0 seconds).
+2013-01-15 10:32:29.639 [info] <0.7.0> Application riak_search started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:29.648 [warning] <0.1585.0>@riak_api_pb_listener:get_port:99 The config riak_kv/pb_port has been deprecated and will be removed.  Use riak_api/pb_port in the future.
+2013-01-15 10:32:29.648 [warning] <0.1585.0>@riak_api_pb_listener:get_ip:117 The config riak_kv/pb_ip has been deprecated and will be removed.  Use riak_api/pb_ip in the future.
+2013-01-15 10:32:29.662 [info] <0.7.0> Application riak_api started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:29.667 [info] <0.7.0> Application cluster_info started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:29.672 [info] <0.7.0> Application riak_control started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:29.672 [info] <0.7.0> Application erlydtl started on node 'riak804584@127.0.0.1'
+2013-01-15 10:32:29.736 [info] <0.1578.0>@riak_core:wait_for_application:419 Wait complete for application riak_search (0 seconds)
+2013-01-15 10:53:28.072 [error] emulator Error in process <0.3103.0> on node 'riak804584@127.0.0.1' with exit value: {{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]}
+
+
+2013-01-15 10:53:28.083 [error] <0.69.0> gen_server memsup terminated with reason: no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762
+2013-01-15 10:53:28.086 [info] <0.427.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_hook) host stopping (<0.427.0>)
+2013-01-15 10:53:28.086 [info] <0.428.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_hook) host stopping (<0.428.0>)
+2013-01-15 10:53:28.086 [info] <0.317.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_reduce) host stopping (<0.317.0>)
+2013-01-15 10:53:28.087 [info] <0.292.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_reduce) host stopping (<0.292.0>)
+2013-01-15 10:53:28.087 [info] <0.294.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_reduce) host stopping (<0.294.0>)
+2013-01-15 10:53:28.087 [info] <0.296.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_reduce) host stopping (<0.296.0>)
+2013-01-15 10:53:28.088 [info] <0.290.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_map) host stopping (<0.290.0>)
+2013-01-15 10:53:28.088 [info] <0.295.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_reduce) host stopping (<0.295.0>)
+2013-01-15 10:53:28.088 [info] <0.293.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_reduce) host stopping (<0.293.0>)
+2013-01-15 10:53:28.089 [info] <0.285.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_map) host stopping (<0.285.0>)
+2013-01-15 10:53:28.089 [info] <0.284.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_map) host stopping (<0.284.0>)
+2013-01-15 10:53:28.089 [info] <0.287.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_map) host stopping (<0.287.0>)
+2013-01-15 10:53:28.090 [info] <0.289.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_map) host stopping (<0.289.0>)
+2013-01-15 10:53:28.090 [info] <0.288.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_map) host stopping (<0.288.0>)
+2013-01-15 10:53:28.090 [info] <0.286.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_map) host stopping (<0.286.0>)
+2013-01-15 10:53:28.088 [info] <0.283.0>@riak_kv_js_vm:terminate:240 Spidermonkey VM (pool: riak_kv_js_map) host stopping (<0.283.0>)
+2013-01-15 10:53:28.091 [error] <0.69.0> CRASH REPORT Process memsup with 0 neighbours exited with reason: no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762 in gen_server:terminate/6 line 747
+2013-01-15 10:53:28.096 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-15 10:53:28.096 [error] <0.67.0> Supervisor os_mon_sup had child memsup started with memsup:start_link() at <0.69.0> exit with reason no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762 in context child_terminated
+2013-01-15 10:53:28.098 [error] <0.3105.0> gen_server memsup terminated with reason: no case clause matching {more,"Pages free:~d.",0,[]} in memsup:fread_value/2 line 762
+2013-01-15 11:08:25.912 [info] <0.7.0> Application lager started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:25.998 [info] <0.149.0>@riak_core_ring_manager:reload_ring:226 Upgrading legacy ring
+2013-01-15 11:08:26.115 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_core,vnode_routing} = proxy
+2013-01-15 11:08:26.121 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_core,staged_joins} = true
+2013-01-15 11:08:26.126 [info] <0.7.0> Application riak_core started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:26.159 [info] <0.262.0>@riak_core:wait_for_application:425 Waiting for application riak_pipe to start (0 seconds).
+2013-01-15 11:08:26.160 [info] <0.7.0> Application riak_pipe started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:26.186 [info] <0.271.0>@riak_core:wait_for_service:445 Waiting for service riak_kv to start (0 seconds)
+2013-01-15 11:08:26.229 [info] <0.283.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.283.0>)
+2013-01-15 11:08:26.232 [info] <0.284.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.284.0>)
+2013-01-15 11:08:26.236 [info] <0.285.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.285.0>)
+2013-01-15 11:08:26.239 [info] <0.286.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.286.0>)
+2013-01-15 11:08:26.243 [info] <0.287.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.287.0>)
+2013-01-15 11:08:26.246 [info] <0.288.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.288.0>)
+2013-01-15 11:08:26.250 [info] <0.289.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.289.0>)
+2013-01-15 11:08:26.253 [info] <0.290.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_map) host starting (<0.290.0>)
+2013-01-15 11:08:26.256 [info] <0.292.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.292.0>)
+2013-01-15 11:08:26.259 [info] <0.293.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.293.0>)
+2013-01-15 11:08:26.261 [info] <0.262.0>@riak_core:wait_for_application:419 Wait complete for application riak_pipe (0 seconds)
+2013-01-15 11:08:26.269 [info] <0.294.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.294.0>)
+2013-01-15 11:08:26.276 [info] <0.295.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.295.0>)
+2013-01-15 11:08:26.283 [info] <0.297.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.297.0>)
+2013-01-15 11:08:26.286 [info] <0.414.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_reduce) host starting (<0.414.0>)
+2013-01-15 11:08:26.289 [info] <0.427.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_hook) host starting (<0.427.0>)
+2013-01-15 11:08:26.293 [info] <0.428.0>@riak_kv_js_vm:init:76 Spidermonkey VM (thread stack: 16MB, max heap: 8MB, pool: riak_kv_js_hook) host starting (<0.428.0>)
+2013-01-15 11:08:26.866 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,vnode_vclocks} = true
+2013-01-15 11:08:26.873 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,legacy_keylisting} = false
+2013-01-15 11:08:26.897 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,listkeys_backpressure} = true
+2013-01-15 11:08:26.905 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,mapred_system} = pipe
+2013-01-15 11:08:26.936 [info] <0.155.0>@riak_core_capability:process_capability_changes:529 New capability: {riak_kv,mapred_2i_pipe} = true
+2013-01-15 11:08:26.979 [info] <0.524.0>@riak_core:wait_for_application:425 Waiting for application riak_kv to start (0 seconds).
+2013-01-15 11:08:27.090 [info] <0.7.0> Application riak_kv started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:27.128 [info] <0.7.0> Application merge_index started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:27.161 [info] <0.537.0>@riak_core:wait_for_service:445 Waiting for service riak_kv to start (0 seconds)
+2013-01-15 11:08:27.185 [info] <0.524.0>@riak_core:wait_for_application:419 Wait complete for application riak_kv (0 seconds)
+2013-01-15 11:08:27.994 [info] <0.537.0>@riak_core:wait_for_service:439 Wait complete for service riak_kv (0 seconds)
+2013-01-15 11:08:28.036 [info] <0.1578.0>@riak_core:wait_for_application:425 Waiting for application riak_search to start (0 seconds).
+2013-01-15 11:08:28.048 [info] <0.7.0> Application riak_search started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:28.067 [info] <0.271.0>@riak_core:wait_for_service:439 Wait complete for service riak_kv (1 seconds)
+2013-01-15 11:08:28.087 [warning] <0.1585.0>@riak_api_pb_listener:get_port:99 The config riak_kv/pb_port has been deprecated and will be removed.  Use riak_api/pb_port in the future.
+2013-01-15 11:08:28.090 [warning] <0.1585.0>@riak_api_pb_listener:get_ip:117 The config riak_kv/pb_ip has been deprecated and will be removed.  Use riak_api/pb_ip in the future.
+2013-01-15 11:08:28.123 [info] <0.7.0> Application riak_api started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:28.131 [info] <0.7.0> Application cluster_info started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:28.142 [info] <0.7.0> Application riak_control started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:28.146 [info] <0.7.0> Application erlydtl started on node 'riak804584@127.0.0.1'
+2013-01-15 11:08:28.146 [info] <0.1578.0>@riak_core:wait_for_application:419 Wait complete for application riak_search (0 seconds)

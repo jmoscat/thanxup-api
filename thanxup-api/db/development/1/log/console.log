@@ -2,3 +2,31 @@
 2013-01-11 15:11:06.846 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
 2013-01-11 19:42:17.796 [warning] <0.69.0> OS_MON (memsup) timeout, no data collected
 
+2013-01-12 17:49:17.507 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.430.0> [{name,riak_kv_map_master},{initial_call,{gen,init_it,7}},{almost_current_function,{gen_server2,process_next_msg,9}},{message_queue_len,0}] [{timeout,575},{old_heap_block_size,0},{heap_block_size,610},{mbuf_size,0},{stack_size,13},{old_heap_size,0},{heap_size,266}]
+2013-01-13 08:04:24.575 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.62.0> [{name,timer_server},{initial_call,{timer,init,1}},{almost_current_function,{timer,timer_timeout,1}},{message_queue_len,1}] [{timeout,393},{old_heap_block_size,0},{heap_block_size,233},{mbuf_size,0},{stack_size,19},{old_heap_size,0},{heap_size,46}]
+2013-01-14 09:21:15.021 [warning] <0.69.0> OS_MON (memsup) timeout, no data collected
+
+2013-01-14 09:53:13.780 [warning] <0.69.0> OS_MON (memsup) timeout, no data collected
+
+2013-01-14 15:43:31.047 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 15:43:29.389 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.793.0> [{initial_call,{riak_core_vnode,init,1}},{almost_current_function,{gen_fsm,loop,7}},{message_queue_len,0}] [{timeout,732},{old_heap_block_size,0},{heap_block_size,2584},{mbuf_size,0},{stack_size,45},{old_heap_size,0},{heap_size,937}]
+2013-01-14 15:43:34.741 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.1168.0> [{initial_call,{riak_core_vnode,init,1}},{almost_current_function,{gen_fsm,loop,7}},{message_queue_len,0}] [{timeout,731},{old_heap_block_size,0},{heap_block_size,2584},{mbuf_size,0},{stack_size,45},{old_heap_size,0},{heap_size,951}]
+2013-01-14 15:43:34.742 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.154.0> [{name,riak_core_vnode_manager},{initial_call,{riak_core_vnode_manager,init,1}},{almost_current_function,{gen_server,loop,6}},{message_queue_len,0}] [{timeout,327},{old_heap_block_size,0},{heap_block_size,17711},{mbuf_size,0},{stack_size,334},{old_heap_size,0},{heap_size,5509}]
+2013-01-14 15:43:34.742 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.6.0> [{name,error_logger},{initial_call,{gen_event,init_it,6}},{almost_current_function,{gen_event,fetch_msg,5}},{message_queue_len,0}] [{timeout,515},{old_heap_block_size,0},{heap_block_size,377},{mbuf_size,0},{stack_size,30},{old_heap_size,0},{heap_size,110}]
+2013-01-14 15:43:34.743 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.122.0> [{initial_call,{application_master,init,4}},{almost_current_function,{application_master,main_loop,2}},{message_queue_len,0}] [{timeout,304},{old_heap_block_size,0},{heap_block_size,233},{mbuf_size,0},{stack_size,6},{old_heap_size,0},{heap_size,77}]
+2013-01-14 15:55:15.581 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 15:56:15.586 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 15:57:15.588 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 15:58:15.594 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 15:59:15.601 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:01:15.605 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:02:15.608 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:08:15.631 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:17:15.661 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:21:15.675 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:24:15.685 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:26:15.694 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:27:15.696 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:39:15.738 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:40:15.742 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 19:17:39.284 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.157.0> [{name,riak_core_claimant},{initial_call,{riak_core_claimant,init,1}},{almost_current_function,{gen_server,loop,6}},{message_queue_len,0}] [{timeout,4757471},{old_heap_block_size,0},{heap_block_size,2584},{mbuf_size,0},{stack_size,29},{old_heap_size,0},{heap_size,815}]

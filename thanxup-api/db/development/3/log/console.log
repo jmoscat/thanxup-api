@@ -9,3 +9,22 @@
 2013-01-12 10:55:13.530 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.823.0> [{initial_call,{riak_core_vnode,init,1}},{almost_current_function,{gen_fsm,loop,7}},{message_queue_len,0}] [{timeout,306},{old_heap_block_size,0},{heap_block_size,2584},{mbuf_size,0},{stack_size,45},{old_heap_size,0},{heap_size,965}]
 2013-01-12 10:55:13.530 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.853.0> [{initial_call,{riak_core_vnode,init,1}},{almost_current_function,{gen_fsm,loop,7}},{message_queue_len,0}] [{timeout,120},{old_heap_block_size,0},{heap_block_size,2584},{mbuf_size,0},{stack_size,45},{old_heap_size,0},{heap_size,969}]
 2013-01-12 12:01:34.169 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.154.0> [{name,riak_core_vnode_manager},{initial_call,{riak_core_vnode_manager,init,1}},{almost_current_function,{gen_server,loop,6}},{message_queue_len,0}] [{timeout,135},{old_heap_block_size,0},{heap_block_size,10946},{mbuf_size,0},{stack_size,23},{old_heap_size,0},{heap_size,3489}]
+2013-01-14 09:21:14.571 [warning] <0.69.0> OS_MON (memsup) timeout, no data collected
+
+2013-01-14 09:53:13.084 [warning] <0.69.0> OS_MON (memsup) timeout, no data collected
+
+2013-01-14 09:53:14.332 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.62.0> [{name,timer_server},{initial_call,{timer,init,1}},{almost_current_function,{gen_server,loop,6}},{message_queue_len,0}] [{timeout,987},{old_heap_block_size,0},{heap_block_size,233},{mbuf_size,0},{stack_size,19},{old_heap_size,0},{heap_size,46}]
+2013-01-14 15:43:18.774 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.1168.0> [{initial_call,{riak_core_vnode,init,1}},{almost_current_function,{gen_fsm,loop,7}},{message_queue_len,0}] [{timeout,1837},{old_heap_block_size,0},{heap_block_size,2584},{mbuf_size,0},{stack_size,45},{old_heap_size,0},{heap_size,969}]
+2013-01-14 15:43:30.187 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.29.0> [{name,user_drv},{initial_call,{user_drv,server,2}},{almost_current_function,{user_drv,server_loop,5}},{message_queue_len,0}] [{timeout,290},{old_heap_block_size,0},{heap_block_size,233},{mbuf_size,0},{stack_size,8},{old_heap_size,0},{heap_size,42}]
+2013-01-14 15:43:34.853 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 15:43:34.854 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.6.0> [{name,error_logger},{initial_call,{gen_event,init_it,6}},{almost_current_function,{gen,do_call,4}},{message_queue_len,0}] [{timeout,361},{old_heap_block_size,0},{heap_block_size,377},{mbuf_size,0},{stack_size,30},{old_heap_size,0},{heap_size,110}]
+2013-01-14 16:05:34.037 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:08:34.045 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:18:34.083 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:20:34.091 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:22:34.100 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:29:34.124 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:31:34.132 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-14 16:43:34.181 [info] <0.41.0> alarm_handler: {clear,system_memory_high_watermark}
+2013-01-14 16:44:34.185 [info] <0.41.0> alarm_handler: {set,{system_memory_high_watermark,[]}}
+2013-01-15 09:38:33.542 [info] <0.63.0>@riak_core_sysmon_handler:handle_event:85 monitor long_gc <0.302.0> [{name,riak_kv_map_master},{initial_call,{gen,init_it,7}},{almost_current_function,{bitcask_nifs,lock_acquire,2}},{message_queue_len,0}] [{timeout,167},{old_heap_block_size,0},{heap_block_size,987},{mbuf_size,0},{stack_size,31},{old_heap_size,0},{heap_size,406}]

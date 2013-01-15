@@ -1,0 +1,37 @@
+2013-01-15 10:53:28 =ERROR REPORT====
+Error in process <0.3103.0> on node 'riak804584@127.0.0.1' with exit value: {{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]}
+
+2013-01-15 10:53:28 =ERROR REPORT====
+** Generic server memsup terminating 
+** Last message in was {'EXIT',<0.3103.0>,{{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]}}
+** When Server state == [{data,[{"Timeout",60000}]},{items,{"Memory Usage",[{"Allocated",3532164000},{"Total",3656992000}]}},{items,{"Worst Memory User",[{"Pid",<0.104.0>},{"Memory",600976}]}}]
+** Reason for termination == 
+** {{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]}
+2013-01-15 10:53:28 =CRASH REPORT====
+  crasher:
+    initial call: memsup:init/1
+    pid: <0.69.0>
+    registered_name: memsup
+    exception exit: {{{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [os_mon_sup,<0.66.0>]
+    messages: []
+    links: [<0.67.0>]
+    dictionary: [{system_memory_high_watermark,set}]
+    trap_exit: true
+    status: running
+    heap_size: 610
+    stack_size: 24
+    reductions: 200889
+  neighbours:
+2013-01-15 10:53:28 =SUPERVISOR REPORT====
+     Supervisor: {local,os_mon_sup}
+     Context:    child_terminated
+     Reason:     {{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]}
+     Offender:   [{pid,<0.69.0>},{name,memsup},{mfargs,{memsup,start_link,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2013-01-15 10:53:28 =ERROR REPORT====
+** Generic server memsup terminating 
+** Last message in was {'EXIT',<0.3106.0>,{{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]}}
+** When Server state == {state,{unix,darwin},false,undefined,undefined,false,60000,30000,0.8,0.05,<0.3106.0>,#Ref<0.0.0.16173>,undefined,[reg],[]}
+** Reason for termination == 
+** {{case_clause,{more,"Pages free:~d.",0,[]}},[{memsup,fread_value,2,[{file,"memsup.erl"},{line,762}]},{memsup,get_memory_usage,1,[{file,"memsup.erl"},{line,732}]},{memsup,'-handle_info/2-fun-0-',2,[{file,"memsup.erl"},{line,343}]}]}
