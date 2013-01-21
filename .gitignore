@@ -16,4 +16,5 @@
 
 # db files
 /db/development
-
+/config/ripple.yml
+/config/database.yml
