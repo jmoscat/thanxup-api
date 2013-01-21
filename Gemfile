@@ -11,7 +11,7 @@ gem 'postgres_ext'
 #gem 'activerecord-postgres-array'
 
 #QR Codes
-gem 'qrencoder'
+#gem 'qrencoder'
 
 #Login/authentication
 gem 'devise'
