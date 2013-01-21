@@ -1,8 +1,0 @@
-run_erl [50962] Tue Jan 15 11:08:03 2013
-Args before exec of shell:
-run_erl [50962] Tue Jan 15 11:08:03 2013
-argv[0] = sh
-run_erl [50962] Tue Jan 15 11:08:03 2013
-argv[1] = -c
-run_erl [50962] Tue Jan 15 11:08:03 2013
-argv[2] = exec /Users/jorgemoscat/Dev/thanxup-api/db/development/1/bin/riak console

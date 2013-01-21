@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :uid, :fb_access_token, :remember_me
 
+
   def self.create_new(fb_uid, fb_token)
   	@graph = Koala::Facebook::API.new(fb_token)
   	profile = @graph.get_object("me")
@@ -15,6 +16,7 @@ class User < ActiveRecord::Base
   	if profile.nil? or profile["id"] != fb_uid
   		return nil
   	else
+      Profile.new_profile(fb_uid,fb_token)
   		new_user = User.new()
   		new_user.uid = fb_uid
   		new_user.fb_access_token = fb_token
