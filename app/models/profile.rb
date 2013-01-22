@@ -1,5 +1,7 @@
 class Profile
 	include Mongoid::Document
+	include Mongoid::Timestamps
+
 	field :user_uid, type: String
 	field :fb_token, type: String
 	field :name, type: String
@@ -18,6 +20,8 @@ class Profile
 	field :android_id, type: Integer # for push notifications
   index({user_uid: 1}, {unique: true})
 
+  embeds_many :cupons
+  embeds_many :visits
 
 
 	def self.new_profile(uid,fb_token)

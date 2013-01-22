@@ -7,15 +7,10 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 #Postgresql
 gem 'pg'
 gem 'postgres_ext'
-#gem 'mysql2'
 #gem 'activerecord-postgres-array'
 
 #QR Codes
 #gem 'qrencoder'
-
-#Neoj4
-
-
 
 #MongoDB
 gem 'bson_ext'
