@@ -13,6 +13,10 @@ gem 'postgres_ext'
 #QR Codes
 #gem 'qrencoder'
 
+#Neoj4
+
+
+
 #MongoDB
 gem 'bson_ext'
 gem 'mongo'

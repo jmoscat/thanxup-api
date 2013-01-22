@@ -7,7 +7,12 @@ class Profile
 	field :location_name, type: String
 	field :location_id, type: String
 	field :DOB, type: Date
+
 	field :friend_count, type: Integer
+	field :fb_friends, type: Array
+	field :thanxup_friends, type: Array
+	field :NN_thanxup_friends, type: Array
+
 	field :influence, type: Float
 	field :iphone_id, type: Integer # for push notifications
 	field :android_id, type: Integer # for push notifications
@@ -17,7 +22,6 @@ class Profile
 
 	def self.new_profile(uid,fb_token)
 		new_prof = Profile.new
-		new_prof.key = uid
 		new_prof.user_uid = uid
 		new_prof.fb_token = fb_token
 		new_prof.get_facebook_data
@@ -36,7 +40,15 @@ class Profile
 		self.name = profile["name"]
 		self.location_name = profile["location"]["name"]
 		self.location_id = profile["location"]["id"]
-		self.DOB = profile["birthday"]
+		self.DOB = Date.strptime(profile["birthday"], '%m/%d/%Y')
+
+		#get_friends
+		friends = Array.new
+		@graph.get_connections("me","friends",:fields =>"id").each do |x|
+			friends << x["id"]
+		end
+
+		self.fb_friends = friends
 		num = @graph.fql_query("SELECT friend_count FROM user WHERE uid = me()")
 		self.friend_count = num.first["friend_count"]
 		self.save
