@@ -13,6 +13,11 @@ gem 'postgres_ext'
 #QR Codes
 #gem 'qrencoder'
 
+#MongoDB
+gem 'bson_ext'
+gem 'mongo'
+gem 'mongoid'
+
 #Login/authentication
 gem 'devise'
 gem 'cancan'

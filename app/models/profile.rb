@@ -1,15 +1,17 @@
-require 'ripple'
 class Profile
-	include Ripple::Document
-	property :user_uid,         String, index: true
-	property :fb_token, 				String, presence: true
-	property :name,            	String
-	property :email,						String
-	property :location_name, 		String
-	property :location_id, 			String
-	property :DOB,							Time
-	property :friend_count,			Integer
-	property :influence,				Float
+	include Mongoid::Document
+	field :user_uid, type: String
+	field :fb_token, type: String
+	field :name, type: String
+	field :email, type: String
+	field :location_name, type: String
+	field :location_id, type: String
+	field :DOB, type: Date
+	field :friend_count, type: Integer
+	field :influence, type: Float
+	field :iphone_id, type: Integer # for push notifications
+	field :android_id, type: Integer # for push notifications
+  index({user_uid: 1}, {unique: true})
 
 
 
