@@ -41,7 +41,7 @@ class Api::AppLoginController < ApplicationController
   end
 
   def destroy
-    @user=User.find_by_authentication_token(params[:id])
+    @user=User.find_by(authentication_token: params[:id])
     if @user.nil?
       logger.info("Token not found")
       render :status=>404, :json=>{:message=>"Invalid token."}
