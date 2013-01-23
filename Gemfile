@@ -32,6 +32,9 @@ gem 'stripe'
 
 #Background worker
 gem 'sidekiq'
+gem 'slim'
+gem 'sinatra', :require => nil
+gem 'sprockets'
 
 #Memcache
 gem 'memcached'

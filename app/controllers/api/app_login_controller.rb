@@ -1,7 +1,7 @@
 class Api::AppLoginController < ApplicationController
     skip_before_filter :verify_authenticity_token
     respond_to :json
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"AAACEdEose0cBADrfrpRIytkGHZCS9mEsR5FmYKQt7JSn6SglbPgT2kt3ozDxHo0aocR2FCxns40R4niJOkmZCz9K4tZBw6ywtEOKCKkXAZDZD"}' http://localhost:3000/api/app_login.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"AAACEdEose0cBAAM8JrRbZA1tS5I5kzhkmw9rKAZCl0VbJzXTYyoYSHTA2DAi9ZCP5b4bPObO9d01WmZB2w78R0NyCD7vHbZAskIN637VJjAZDZD"}' http://localhost:3000/api/app_login.json
     #http://matteomelani.wordpress.com/2011/10/17/authentication-for-mobile-devices/
     def create
       uid = params[:uid]
@@ -23,7 +23,7 @@ class Api::AppLoginController < ApplicationController
        return
     end
 
-    @user=User.find_by_uid(uid.downcase)
+    @user=User.find_by(user_uid: uid.downcase)
 
     if @user.nil?
       @user = User.create_new(uid, fb_access_token)
@@ -41,7 +41,7 @@ class Api::AppLoginController < ApplicationController
   end
 
   def destroy
-    @user=User.find_by_authentication_token(params[:id])
+    @user=User.find_by(authentication_token: params[:id])
     if @user.nil?
       logger.info("Token not found")
       render :status=>404, :json=>{:message=>"Invalid token."}

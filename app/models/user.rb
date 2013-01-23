@@ -1,4 +1,30 @@
-class User < ActiveRecord::Base
+class User
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  field :user_uid, type: String
+  field :fb_token, type: String
+  field :authentication_token, :type => String
+  field :name, type: String
+  field :email, type: String
+  field :location_name, type: String
+  field :location_id, type: String
+  field :DOB, type: Date
+
+  field :friend_count, type: Integer
+  field :fb_friends, type: Array
+  field :thanxup_friends, type: Array
+  field :NN_thanxup_friends, type: Array
+
+  field :influence, type: Float
+  field :iphone_id, type: Integer # for push notifications
+  field :android_id, type: Integer # for push notifications
+  index({user_uid: 1}, {unique: true})
+
+  embeds_many :cupons
+  embeds_many :visits
+
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -16,12 +42,13 @@ class User < ActiveRecord::Base
   	if profile.nil? or profile["id"] != fb_uid
   		return nil
   	else
-      Profile.new_profile(fb_uid,fb_token)
-  		new_user = User.new()
-  		new_user.uid = fb_uid
-  		new_user.fb_access_token = fb_token
+  		new_user = User.new
+  		new_user.user_uid = fb_uid
+  		new_user.fb_token = fb_token
   		new_user.save
+      FacebookData.perform_async(fb_uid)
   		return new_user
   	end
   end
+
 end
