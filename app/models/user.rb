@@ -47,8 +47,21 @@ class User
   		new_user.fb_token = fb_token
   		new_user.save
       FacebookData.perform_async(fb_uid)
+      #Calculate Influence
   		return new_user
   	end
   end
+
+  def update_fb_token(fb_token)
+    self.fb_token = fb_token
+    self.save
+  end
+
+  def update_info_recal_influence
+    FacebookData.perform_async(self.fb_token)
+    #Influence
+
+  end
+
 
 end
