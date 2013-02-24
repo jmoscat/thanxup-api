@@ -44,10 +44,18 @@ class Api::AppLoginController < ApplicationController
       @user.update_info_recal_influence
       @user.ensure_authentication_token!
       render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
+    elsif(Date.today - @user.updated_at.to_date).to_i >= 14
+      @user.update_fb_token(fb_access_token)
+      @user.update_info_recal_influence
+      @user.ensure_authentication_token!
+      render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
+    else
+      render :status=>200, :json=>{:thanxup_token=>"No Auth needed"}
     end
+
     # http://rdoc.info/github/plataformatec/devise/master/Devise/Models/TokenAuthenticatable
     #@user.update_fb_token()
-    
+      
   end
 
   def destroy
