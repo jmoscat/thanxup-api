@@ -62,6 +62,11 @@ class Profile
 
 
 	def calculate_influence
+		#SELECT post_id ,likes FROM stream WHERE source_id=me() AND created_time > 1209607343
+		#Time.now - 7.days
+		graph = Koala::Facebook::API.new(self.fb_token)
+		likes = Influence.getWeeklyLikes(graph)
+
 
 	end
 

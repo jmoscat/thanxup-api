@@ -39,7 +39,7 @@ class Api::AppLoginController < ApplicationController
       @user.update_fb_token(fb_access_token)
       @user.ensure_authentication_token!
       render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
-    elsif ((Date.today - @user.updated_at.to_date).to_i >= 6) && Date.today.thursday?
+    elsif ((Date.today - @user.updated_at.to_date).to_i >= 6) #&& Date.today.thursday?
       @user.update_fb_token(fb_access_token)
       @user.update_info_recal_influence
       @user.ensure_authentication_token!
@@ -51,6 +51,7 @@ class Api::AppLoginController < ApplicationController
       render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
     else
       render :status=>200, :json=>{:thanxup_token=>"No Auth needed"}
+      @user.update_fb_token(fb_access_token)
     end
 
     # http://rdoc.info/github/plataformatec/devise/master/Devise/Models/TokenAuthenticatable

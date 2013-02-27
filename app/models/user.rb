@@ -19,10 +19,15 @@ class User
   field :influence, type: Float
   field :iphone_id, type: Integer # for push notifications
   field :android_id, type: Integer # for push notifications
+  #field :consumed_friends_cupons_overall, type: Integer
+  #field :consumed_frined_cupons_week, type: Integer
+  #field :weekly_shares, type:Integer
   index({user_uid: 1}, {unique: true})
 
   embeds_many :cupons
   embeds_many :visits
+
+
 
 
   # Include default devise modules. Others available are:
@@ -58,8 +63,8 @@ class User
   end
 
   def update_info_recal_influence
-    FacebookData.perform_async(self.fb_token)
-    #Influence
+    Influence.basicFacebookData(self.user_uid)
+    
 
   end
 
