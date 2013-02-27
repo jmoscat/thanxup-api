@@ -1,7 +1,7 @@
 class Api::AppLoginController < ApplicationController
   skip_before_filter :verify_authenticity_token
   respond_to :json
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"AAACEdEose0cBAGQ79Dk4yjmTXMIDCKky5ZCh3IrvPBMcb39gi6EIJZCWZBlZCcqCKxLesAYDkGDK1dej7MJbGUC3w9N4wzqQFeBwbgmMwQZDZD"}' http://localhost:3000/api/app_login.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"AAACEdEose0cBABRwcZBJ0XYXj3oKNT7RATn1ZA5RNnVkTcUca1PqrUJ9Oh9aiod6ZAOFMXCuudkfcliQwuXe2bOsensy85wVRhtZA14dQgZDZD"}' http://localhost:3000/api/app_login.json
     #http://matteomelani.wordpress.com/2011/10/17/authentication-for-mobile-devices/
   def create
     uid = params[:uid]
