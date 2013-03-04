@@ -1,7 +1,7 @@
 class Api::AppLoginController < ApplicationController
   skip_before_filter :verify_authenticity_token
   respond_to :json
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"AAACEdEose0cBABRwcZBJ0XYXj3oKNT7RATn1ZA5RNnVkTcUca1PqrUJ9Oh9aiod6ZAOFMXCuudkfcliQwuXe2bOsensy85wVRhtZA14dQgZDZD"}' http://localhost:3000/api/app_login.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"AAACEdEose0cBACC1KLcZCu0i64fZCqwNsv2ZBVYX6M1YbsM93pzFbb6j3dRjJi2pzChMcLPNVeObf5ORAJ3cj1dSSWFbTyvliuZC2rlgsgZDZD"}' http://localhost:3000/api/app_login.json
     #http://matteomelani.wordpress.com/2011/10/17/authentication-for-mobile-devices/
   def create
     uid = params[:uid]
@@ -41,12 +41,14 @@ class Api::AppLoginController < ApplicationController
       render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
     elsif ((Date.today - @user.updated_at.to_date).to_i >= 6) #&& Date.today.thursday?
       @user.update_fb_token(fb_access_token)
-      @user.update_info_recal_influence
+      #gets all Facebook data and calculates influence async
+      FacebookData.perform_async(@user.user_uid)
       @user.ensure_authentication_token!
       render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
     elsif(Date.today - @user.updated_at.to_date).to_i >= 14
       @user.update_fb_token(fb_access_token)
-      @user.update_info_recal_influence
+      #gets all Facebook data and calculates influence async
+      FacebookData.perform_async(@user.user_uid)
       @user.ensure_authentication_token!
       render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
     else
