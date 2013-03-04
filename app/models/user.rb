@@ -51,9 +51,11 @@ class User
   		new_user.user_uid = fb_uid
   		new_user.fb_token = fb_token
   		new_user.save
-      FacebookData.perform_async(fb_uid,graph)
-      #Calculate Influence
-  		return new_user
+
+      #gets all Facebook data and calculates influence async
+      FacebookData.perform_async(new_user.user_uid)
+  		
+      return new_user
   	end
   end
 
@@ -61,19 +63,5 @@ class User
     self.fb_token = fb_token
     self.save
   end
-
-  def update_info_recal_influence
-    graph = Koala::Facebook::API.new(self.fb_token)
-    Influence.basicFacebookData(self.user_uid,graph)
-    likes_per_day = (Influence.getWeeklyLikes(graph))/7
-    friends = (self.friend_count)/100
-
-    weighted_likes = (1- Math.exp(-0.795*likes_per_day))
-    weighted_friends = (1- Math.exp(-0.795*friends))
-
-    self.influence = weighted_likes*0.6 + weighted_friends*0.4
-    self.save
-  end
-
-
+  
 end

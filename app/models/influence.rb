@@ -22,6 +22,28 @@ class Influence
 
 	end
 
+	def self.update_info_recal_influence(user_id)
+    user = User.find_by(user_uid: user_id)
+    graph = Koala::Facebook::API.new(user.fb_token)
+
+    #Get fresh basic user info
+    Influence.basicFacebookData(user_id,graph)
+
+    #Calculate influence
+    likes = Influence.getWeeklyLikes(graph)
+    likes_per_day = likes/7.0
+    friends = (user.friend_count)/100.0
+
+    weighted_likes = (1- Math.exp(-0.795*likes_per_day))
+    weighted_friends = (1- Math.exp(-0.795*friends))
+
+    user.influence = weighted_likes*0.6 + weighted_friends*0.4
+    user.save
+
+    #Push notificiation for new influence!
+
+  end
+
 
   def self.getWeeklyLikes(graph)
   	since = (Time.now - 7.days).to_i
