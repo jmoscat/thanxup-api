@@ -5,5 +5,5 @@ class Cupon
   field :owner_id, type: String
   field :cupon_id, type: String
   field :expiration_date, type: Date
-
+  belongs_to :venue
 end

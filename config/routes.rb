@@ -8,6 +8,7 @@ ThanxupApi::Application.routes.draw do
   end
 
   match '/getinfluence' => 'profileData#getInfluence'
+  match '/getvenue' => 'profileData#getVenue'
 
 
   root :to => "home#index"

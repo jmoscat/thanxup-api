@@ -3,5 +3,10 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   cities = City.create([ name: 'Chicago' ,  name: 'Copenhagen' ])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+	
+		new_venue = Venue.create(venue_id: '121231', name: 'Paco Bar', web: 'wwww.pacomola.com', fb_page: 'wwww.facebook.com/pacomola', address: 'Castellana 123, Madrid', latitude: '40.482471', longitude: '-3.955078')
+		offer = Offer.new(offer_id: 'asdfasdf', offer_text: 'Hoy te damos copa gratis si tu influencia es >40%, al resto un descuento sorpresa!')
+		new_venue.offers.push(offer)
+		new_venue.save

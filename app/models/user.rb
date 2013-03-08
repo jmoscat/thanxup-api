@@ -65,8 +65,8 @@ class User
   def update_info_recal_influence
     graph = Koala::Facebook::API.new(self.fb_token)
     Influence.basicFacebookData(self.user_uid,graph)
-    likes_per_day = (Influence.getWeeklyLikes(graph))/7
-    friends = (self.friend_count)/100
+    likes_per_day = (Influence.getWeeklyLikes(graph))/7.0
+    friends = (self.friend_count)/100.0
 
     weighted_likes = (1- Math.exp(-0.795*likes_per_day))
     weighted_friends = (1- Math.exp(-0.795*friends))
