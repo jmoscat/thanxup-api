@@ -16,7 +16,7 @@ class ProfileDataController < ApplicationController
 	def getVenue
 		lat = params[:altitude]
 		lon = params[:longitude]
-		render :status =>200, :json=> VenueData.getClosestVenues(lat,lon)
+		render :status =>200, :json=> Venue.getClosestVenues(lat,lon)
  	end
 
   #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"HBkVUpAF8e6yze5q3RZt", "venue_id":"121231"}' http://localhost:3000/checkin.json
@@ -25,7 +25,7 @@ class ProfileDataController < ApplicationController
     venue_id = params[:venue_id]
     if @user.saveVisit(venue_id)
       render :status =>200, :json=> {:status => "Success"}
-      VenueData.saveVisit(@user.user_uid, venue_id)
+      Venue.saveVisit(@user.user_uid, venue_id)
     else 
       render :status =>200, :json=> {:status => "Ya has hecho checkin hoy, gracias!"}
     end
