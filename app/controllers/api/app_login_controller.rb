@@ -3,6 +3,10 @@ class Api::AppLoginController < ApplicationController
   respond_to :json
 
     #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"AAACEdEose0cBAPK3vMJhWnXblFs8JT5dTkA1vm0PeKkhnSQx5ONiLrNZAejsXQfLPy2iMHCuDTeSufZBvAhu3KIuyYsRwBB1rwGSqvCwZDZD"}' http://localhost:3000/api/app_login.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"100005420705218","fb_access_token":"AAACEdEose0cBAADZBtLZBvWzQ5ztDc3kwIzW9kZAB6kFDjh69PEwZAZAdshpwlWVtdKyQJBb6NVJKPpJ13jsCL5F0UmGZC5KdJ4YvXkvnFbmciSYeXQXRf"}' http://localhost:3000/api/app_login.json
+
+
+
 
     #http://matteomelani.wordpress.com/2011/10/17/authentication-for-mobile-devices/
   def create
