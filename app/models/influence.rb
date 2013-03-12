@@ -5,8 +5,14 @@ class Influence
 	  profile = graph.get_object("me")
 	  user.email = profile["email"]
 	  user.name = profile["name"]
-	  user.location_name = profile["location"]["name"]
-	  user.location_id = profile["location"]["id"]
+    location = profile["location"]
+    if location.nil?
+      user.location_name = ""
+      user.location_id = ""
+    else
+      user.location_name = location["name"]
+	    user.location_id = location["id"]
+    end
 	  user.DOB = Date.strptime(profile["birthday"], '%m/%d/%Y')
 
 	  #get_friends

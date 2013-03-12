@@ -21,7 +21,13 @@ class VenueData
   		}
     end
   	return venue_respond.to_json
+  end
 
+  def self.saveVisit(user_id, venue_id)
+  	#We should also check here if user has checkin already...later on...
+  	venue = Venue.find_by(venue_id: venue_id)
+  	venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id ,shared: true))
+  	venue.save
   end
 
 end
