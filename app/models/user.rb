@@ -4,7 +4,8 @@ class User
 
   field :user_uid, type: String
   field :fb_token, type: String
-  field :authentication_token, :type => String
+  field :encrypted_password, type: String, default: ""
+  field :authentication_token, type: String
   field :name, type: String
   field :email, type: String
   field :location_name, type: String
@@ -22,7 +23,7 @@ class User
   #field :consumed_friends_cupons_overall, type: Integer
   #field :consumed_frined_cupons_week, type: Integer
   #field :weekly_shares, type:Integer
-  index({user_uid: 1}, {unique: true})
+  index({user_uid: 1}, {unique: true, background: true})
 
   embeds_many :cupons
   embeds_many :visits
@@ -77,5 +78,38 @@ class User
     self.influence = weighted_likes*0.6 + weighted_friends*0.4
     self.save
   end
+
+  def saveVisit(venue_id)
+    #check if it has checkin already, checkin on facebook regardless...
+    last_visit = self.visits.where(:venue_id => venue_id).last
+    if last_visit.nil?
+      #self.checkin(venue_id)
+      Checkin.perform_async(self.user_uid, venue_id)
+      self.visits.push(Visit.new(venue_id: venue_id, shared: true))
+      self.save
+      return true
+    elsif (((Time.now - last_visit.created_at)/3600) >= 24.0)
+      #self.checkin(venue_id)
+      Checkin.perform_async(self.user_uid, venue_id)
+      self.visits.push(Visit.new(venue_id: venue_id, shared: true))
+      self.save
+      return true
+    else  
+      return false
+    end
+  end
+
+  def checkin(venue_id)
+    venue = Venue.where(:venue_id => venue_id).last
+    graph = Koala::Facebook::API.new(self.fb_token)
+    if (venue.offers.last.nil?)
+      return "CHECKIN STATUS: Saved, no offer to share"
+    else
+      graph.put_wall_post(venue.offers.last.fb_post, {"place" => venue.place_id})
+      return "CHECKIN STATUS: Shared"
+    end
+  end
+
+
 
 end

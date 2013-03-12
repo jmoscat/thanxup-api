@@ -9,7 +9,7 @@ ThanxupApi::Application.routes.draw do
 
   match '/getinfluence' => 'profileData#getInfluence'
   match '/getvenue' => 'profileData#getVenue'
-
+  match '/checkin' => 'profileData#checkin'
 
   root :to => "home#index"
   # The priority is based upon order of creation:

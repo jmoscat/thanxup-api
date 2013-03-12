@@ -3,6 +3,7 @@ class Offer
   include Mongoid::Timestamps
   field :offer_id, type: String
   field :offer_text, type: String
+  field :fb_post, type: String
   field :valid_from, type: DateTime
   field :valid_until, type: DateTime
   
@@ -18,4 +19,6 @@ class Offer
   field :action_3, type: String
   field :info_3, type: String
   embedded_in :venue
+
+
 end
