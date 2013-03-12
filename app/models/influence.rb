@@ -13,8 +13,13 @@ class Influence
       user.location_name = location["name"]
 	    user.location_id = location["id"]
     end
-	  user.DOB = Date.strptime(profile["birthday"], '%m/%d/%Y')
 
+    if profile["birthday"].nil?
+      user.DOB = ""
+    else
+      user.DOB = Date.strptime(profile["birthday"], '%m/%d/%Y')
+    end
+    
 	  #get_friends
 	  friends = Array.new
 	  graph.get_connections("me","friends",:fields =>"id").each do |x|
