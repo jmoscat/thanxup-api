@@ -49,4 +49,10 @@ class Venue
     venue.save
   end
 
+  #This only gets called if user successes fully shared (from controller)
+  
+
+
+
+
 end
