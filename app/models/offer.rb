@@ -18,7 +18,7 @@ class Offer
   field :influce_3, type: Float
   field :action_3, type: String
   field :info_3, type: String
-  embedded_in :venue
+  belongs_to :venue
 
 
 end

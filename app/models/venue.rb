@@ -13,7 +13,7 @@ class Venue
   field :address, type: String
   field :latitude, type: String
   field :longitude, type: String
-  embeds_many :offers
+  has_many :offers
   embeds_many :venue_visits
 
   index({venue_id: 1}, {unique: true})
@@ -49,8 +49,8 @@ class Venue
     venue.save
   end
 
-  #This only gets called if user successes fully shared (from controller)
-  
+  #This only gets called if user successesfully shared (from controller)
+
 
 
 
