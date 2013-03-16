@@ -47,9 +47,25 @@ class Venue
     venue = Venue.find_by(venue_id: venue_id)
     venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id ,shared: true))
     venue.save
+    user = User.find_by(user_uid:user_id)
+    
+    #Launch offer
+    offer = venue.offers.first
+    if offer.nil?
+      return "No offer"
+    else
+      if user.influence > offer.influence_1 and user.influence <= influence_2
+        offer.cupon_template.find_by(template_id: "1")
+      elsif user.influence > offer.influence_2 and user.influence <= influence_3
+        offer.cupon_template.find_by(template_id: "2")
+      elsif user.influence > offer.influence_3
+        offer.cupon_template.find_by(template_id: "3")
+      end        
+    end
   end
 
-  #This only gets called if user successesfully shared (from controller)
+  
+  
 
 
 

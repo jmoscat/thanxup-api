@@ -45,10 +45,15 @@ class Influence
     likes_per_day = likes/7.0
     friends = (user.friend_count)/100.0
 
+    #Get tags
+    tags = Influence.getWeeklyTags(graph)
+    tags_per_day = tags/7.0
+
     weighted_likes = (1- Math.exp(-0.795*likes_per_day))
     weighted_friends = (1- Math.exp(-0.795*friends))
+    weighted_tags = (1- Math.exp(-1.35*tags_per_day))
 
-    user.influence = weighted_likes*0.6 + weighted_friends*0.4
+    user.influence = weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3
     user.save
 
     #Push notificiation for new influence!
@@ -66,6 +71,12 @@ class Influence
   		end
   	end
    	return total_likes
+  end
+
+  def self.getWeeklyTags(graph)
+    since = (Time.now - 7.days).to_i 
+    feed = graph.fql_query("SELECT post_id, actor_id, target_id, message FROM stream WHERE filter_key = 'others' AND source_id = me() AND created_time >" + since.to_s)
+    return feed.count
   end
 
   def self.getShares(user)

@@ -1,12 +1,11 @@
-require 'digest'
-
-class Cupon
+class CuponTemplate
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :cupon_id, type: String
-  field :store_id, type: String
-  field :user_fb_id, type: String
-  field :parent_cupon, type: String
+
+  field :template_id, type: String #1,2,3
+  field :store_id, type: String,  default: ""
+  field :user_fb_id, type: String, default: ""
+  field :parent_cupon, type: String, default: ""
 # Cupon info
 	field :cupon_text, type: String
 	field :expiration_date, type: Date
@@ -14,7 +13,7 @@ class Cupon
 # Sharable information
   field :sharable, type: Boolean
   field :sharable_text, type: String
-  field :shared_count, type: Integer
+  field :shared_count, type: Integer, default: ""
   field :sharable_limit, type: Integer
   field :sharable_offer, type: String
   field :sharable_from, type: Date
@@ -23,18 +22,10 @@ class Cupon
 # Consumible information
 	field :consumible, type: Boolean
 	field :consumible_text, type: String
-  field :consumed_count, type: Integer
+  field :consumed_count, type: Integer, default: ""
   field :consumible_limit, type: Integer
   field :consumible_offer, type: String
   field :consumible_from, type: Date
   field :consumible_to, type: Date
-  
-  index({cupon_id: 1}, {unique: true, background: true})
-
-
-  def self.secure_hash (string)
-    Digest::SHA2.hexdigest(string)
-  end
-
-
+  embedded_in :offer
 end
