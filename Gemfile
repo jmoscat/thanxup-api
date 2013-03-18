@@ -5,8 +5,8 @@ gem 'rails', '3.2.2'
 gem 'recaptcha', :require => 'recaptcha/rails'
 
 #Postgresql
-gem 'pg'
-gem 'postgres_ext'
+#gem 'pg'
+#gem 'postgres_ext'
 #gem 'activerecord-postgres-array'
 
 #QR Codes

@@ -27,8 +27,7 @@ class Influence
 	  end
 
 	  user.fb_friends = friends
-	  num = graph.fql_query("SELECT friend_count FROM user WHERE uid = me()")
-	  user.friend_count = num.first["friend_count"]
+	  user.friend_count = friends.count
 	  user.save
 
 	end
