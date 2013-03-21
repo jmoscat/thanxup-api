@@ -30,4 +30,14 @@ class ProfileDataController < ApplicationController
       render :status =>200, :json=> {:status => "Ya has hecho checkin hoy, gracias!"}
     end
   end
+
+  def getCupons
+    @user = current_user.user_uid
+    Band.find_by(name: "Photek")
+
+  end
+
+
+
+
 end

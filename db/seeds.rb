@@ -12,3 +12,52 @@
 		new_venue.offers.push(offer)
 		new_venue.save
 
+		cupon1 = CuponTemplate.new(
+			template_id:"1",
+			cupon_text: "3 euros de descuento en tu proxima copa",
+			valid_from: "Thu, 21 Mar 2013 09:17:57 -0700",
+			valid_until: "Thu, 27 Mar 2013 09:17:57 -0700",
+			used: false,
+			kind: "SHARABLE",
+			sharable_text: "Comparte con 3 amigos y recibe una copa gratis!",
+			shared_count: 0,
+			sharable_limit: 5,
+			sharable_offer: "",
+			sharable_from: "Thu, 21 Mar 2013 09:17:57 -0700",
+			sharable_to:  "Thu, 27 Mar 2013 09:17:57 -0700"
+			)
+
+		cupon2 = CuponTemplate.new(
+			template_id:"2",
+			cupon_text: "5 euros de descuento en tu proxima copa",
+			valid_from: "Thu, 21 Mar 2013 09:17:57 -0700",
+			valid_until: "Thu, 27 Mar 2013 09:17:57 -0700",
+
+			kind: "SHARABLE",
+			sharable_text: "Comparte con 3 amigos y recibe una copa gratis!",
+			shared_count: 0,
+			sharable_limit: 5,
+			sharable_offer: "",
+			sharable_from: "Thu, 21 Mar 2013 09:17:57 -0700",
+			sharable_to:  "Thu, 27 Mar 2013 09:17:57 -0700"
+			)
+
+		cupon3 = CuponTemplate.new(
+			template_id:"2",
+			cupon_text: "Tu proxima copa gratis ;)",
+			valid_from: "Thu, 21 Mar 2013 09:17:57 -0700",
+			valid_until: "Thu, 27 Mar 2013 09:17:57 -0700",
+			kind: "SHARABLE",
+			used: false,
+			sharable_text: "Comparte con 3 amigos y recibe una copa gratis!",
+			shared_count: 0,
+			sharable_limit: 5,
+			sharable_offer: "",
+			sharable_from: "Thu, 21 Mar 2013 09:17:57 -0700",
+			sharable_to:  "Thu, 27 Mar 2013 09:17:57 -0700"
+			)
+
+		offer.cupon_templates.push(cupon1)
+		offer.cupon_templates.push(cupon2)
+		offer.cupon_templates.push(cupon3)
+
