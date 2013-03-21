@@ -24,6 +24,10 @@ gem 'omniauth'
 gem 'rest-client'
 gem 'omniauth-facebook'
 
+#Upload Images
+gem 'paperclip'
+gem 'paperclip-dropbox'
+
 #Web server
 gem 'unicorn'
 

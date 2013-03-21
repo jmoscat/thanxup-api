@@ -32,9 +32,7 @@ class ProfileDataController < ApplicationController
   end
 
   def getCupons
-    @user = current_user.user_uid
-    Band.find_by(name: "Photek")
-
+    render :status => 200, :json => Cupon.getCupons(current_user.user_uid)
   end
 
 

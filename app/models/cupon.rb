@@ -32,7 +32,8 @@ class Cupon
   field :consumible_from, type: Date
   field :consumible_to, type: Date
   
-  index({ _id: 1, user_fb_id: 1 }, { unique: true })
+  index({user_fb_id: 1})
+  index({ _id: 1}, { unique: true })
 
 
   def self.secure_hash (string)
@@ -71,8 +72,10 @@ class Cupon
       new_cupon.consumible_to  = offer.consumible_to
     end
   end
-  
 
+  def self.getCupons(user_id)
+    return Cupon.where(user_fb_id: user_id, used: false).to_json(:only => [ :_id, :store_id, :cupon_text, :valid_from, :valid_until, :kind ])
+  end
 
 
 end
