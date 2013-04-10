@@ -61,3 +61,23 @@
 		offer.cupon_templates.push(cupon2)
 		offer.cupon_templates.push(cupon3)
 
+		myCupon = Cupon.new(
+			
+			cupon_text: "Tu proxima copa gratis ;)",
+			valid_from: "Thu, 21 Mar 2013 09:17:57 -0700",
+			valid_until: "Thu, 27 Mar 2013 09:17:57 -0700",
+			kind: "SHARABLE",
+			used: false,
+			sharable_text: "Comparte con 3 amigos y recibe una copa gratis!",
+			shared_count: 0,
+			sharable_limit: 5,
+			sharable_offer: "",
+			sharable_from: "Thu, 21 Mar 2013 09:17:57 -0700",
+			sharable_to:  "Thu, 27 Mar 2013 09:17:57 -0700"
+			)
+
+
+
+
+
+

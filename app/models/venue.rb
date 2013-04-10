@@ -55,13 +55,13 @@ class Venue
       return "No offer"
     else
       if user.influence > offer.influence_1 and user.influence <= influence_2
-        offer = offer.cupon_template.find_by(template_id: "1")
+        template = offer.cupon_template.find_by(template_id: "1")
       elsif user.influence > offer.influence_2 and user.influence <= influence_3
-        offer = offer.cupon_template.find_by(template_id: "2")
+        template = offer.cupon_template.find_by(template_id: "2")
       elsif user.influence > offer.influence_3
-        offer = offer.cupon_template.find_by(template_id: "3")
+        template = offer.cupon_template.find_by(template_id: "3")
       end  
-      Cupon.cupon_from_offer(offer,user_id,venue_id)      
+      Cupon.cupon_from_offer(template,user_id,venue_id)      
     end
     # Send notification to user
 

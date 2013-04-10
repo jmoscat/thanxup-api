@@ -40,36 +40,36 @@ class Cupon
     Digest::SHA2.hexdigest(string)
   end
 
-  def self.cupon_from_offer(offer,user_id, venue_id)
+  def self.cupon_from_template(template,user_id, venue_id)
     new_cupon = Cupon.new
     new_cupon.cupon_id = secure_hash( "#{new_cupon._id}"+"#{user_id}"+ DateTime.now.to_s)
     new_cupon.store_id = venue_id
     new_cupon.user_fb_id = user_id
     new_cupon.parent_cupon = ""
     new_cupon.used = false
-    new_cupon.cupon_text = offer.offer_text
-    new_cupon.valid_from = offer.valid_from
-    new_cupon.valid_until = offer.valid_until
+    new_cupon.cupon_text = template.cupon_text
+    new_cupon.valid_from = template.valid_from
+    new_cupon.valid_until = template.valid_until
 
-    if offer.kind == "SHARABLE"
+    if template.kind == "SHARABLE"
       new_cupon == "SHARABLE"
-      new_cupon.sharable = offer.sharable
-      new_cupon.sharable_text = offer.sharable_text
-      new_cupon.shared_count = offer.shared_count
-      new_cupon.sharable_limit = offer.sharable_limit
-      new_cupon.sharable_offer = offer.sharable_offer
-      new_cupon.sharable_from  = offer.sharable_from
-      new_cupon.sharable_to  = offer.sharable_to
+      new_cupon.sharable = template.sharable
+      new_cupon.sharable_text = template.sharable_text
+      new_cupon.shared_count = template.shared_count
+      new_cupon.sharable_limit = template.sharable_limit
+      new_cupon.sharable_template = template.sharable_template
+      new_cupon.sharable_from  = template.sharable_from
+      new_cupon.sharable_to  = template.sharable_to
 
-    elsif offer.kind == "CONSUMIBLE"
+    elsif template.kind == "CONSUMIBLE"
       new_cupon.kind = "CONSUMIBLE"
-      new_cupon.consumible = offer.consumible
-      new_cupon.consumible_text = offer.consumible_text
-      new_cupon.consumed_count = offer.consumed_count
-      new_cupon.consumible_limit = offer.consumible_limit
-      new_cupon.consumible_offer = offer.consumible_offer
-      new_cupon.consumible_from  = offer.consumible_from
-      new_cupon.consumible_to  = offer.consumible_to
+      new_cupon.consumible = template.consumible
+      new_cupon.consumible_text = template.consumible_text
+      new_cupon.consumed_count = template.consumed_count
+      new_cupon.consumible_limit = template.consumible_limit
+      new_cupon.consumible_template = template.consumible_template
+      new_cupon.consumible_from  = template.consumible_from
+      new_cupon.consumible_to  = template.consumible_to
     end
   end
 
