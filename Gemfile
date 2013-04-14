@@ -5,8 +5,8 @@ gem 'rails', '3.2.2'
 gem 'recaptcha', :require => 'recaptcha/rails'
 
 #Postgresql
-gem 'pg'
-gem 'postgres_ext'
+#gem 'pg'
+#gem 'postgres_ext'
 #gem 'activerecord-postgres-array'
 
 #QR Codes
@@ -24,6 +24,10 @@ gem 'omniauth'
 gem 'rest-client'
 gem 'omniauth-facebook'
 
+#Upload Images
+gem 'paperclip'
+gem 'paperclip-dropbox'
+
 #Web server
 gem 'unicorn'
 
@@ -36,14 +40,7 @@ gem 'slim'
 gem 'sinatra', :require => nil
 gem 'sprockets'
 
-#Memcache
-gem 'memcached'
-
-#Calendar
-gem 'bootstrap-datepicker-rails'
-
-#Riak
-gem 'ripple', '~> 1.0.0.beta2'
+#rest-client / rest-client
 
 #Social Media gems
 gem 'twitter-text'
