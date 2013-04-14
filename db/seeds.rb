@@ -5,7 +5,12 @@
 #
 #   cities = City.create([ name: 'Chicago' ,  name: 'Copenhagen' ])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-	
+		Cupon.delete_all
+		User.delete_all	
+		Venue.delete_all
+		Visit.delete_all
+		Offer.delete_all
+		
 		new_venue = Venue.new(venue_id: '121231', name: 'Paco Bar', web: 'wwww.pacomola.com', fb_page: 'wwww.facebook.com/pacomola', address: 'Castellana 123, Madrid', place_id:'145768288146',latitude: '40.482471', longitude: '-3.955078')
 		new_venue.save
 		offer = Offer.new(offer_id: 'asdfasdf',influence_1: '0.1', influence_2: '0.5',influence_3: '0.7',fb_post:'Hey man, wazzup?' ,offer_text: 'Hoy te damos copa gratis si tu influencia es >40%, al resto un descuento sorpresa!')
