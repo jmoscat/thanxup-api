@@ -2,7 +2,7 @@ class ProfileDataController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"HBkVUpAF8e6yze5q3RZt"}' http://localhost:3000/getinfluence.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"4Pk9JcqnTdRqyTi5TtMK"}' http://localhost:3000/getinfluence.json
 
   def getInfluence
   	@user = current_user
@@ -11,7 +11,7 @@ class ProfileDataController < ApplicationController
   end
 
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"HBkVUpAF8e6yze5q3RZt", "altitude":"12.3452", "longitude":"121312"}' http://localhost:3000/getvenue.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"4Pk9JcqnTdRqyTi5TtMK", "altitude":"12.3452", "longitude":"121312"}' http://localhost:3000/getvenue.json
 
 	def getVenue
 		lat = params[:altitude]
@@ -19,7 +19,7 @@ class ProfileDataController < ApplicationController
 		render :status =>200, :json=> Venue.getClosestVenues(lat,lon)
  	end
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"HBkVUpAF8e6yze5q3RZt", "venue_id":"121231"}' http://localhost:3000/checkin.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"4Pk9JcqnTdRqyTi5TtMK", "venue_id":"121231"}' http://localhost:3000/checkin.json
   def checkin
     @user = current_user
     venue_id = params[:venue_id]
@@ -31,6 +31,7 @@ class ProfileDataController < ApplicationController
     end
   end
 
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"4Pk9JcqnTdRqyTi5TtMK"}' http://localhost:3000/getcupons.json
   def getCupons
     render :status => 200, :json => Cupon.getCupons(current_user.user_uid)
   end

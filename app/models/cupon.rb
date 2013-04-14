@@ -52,25 +52,22 @@ class Cupon
     new_cupon.valid_until = template.valid_until
 
     if template.kind == "SHARABLE"
-      new_cupon == "SHARABLE"
-      new_cupon.sharable = template.sharable
+      new_cupon.kind = "SHARABLE"
       new_cupon.sharable_text = template.sharable_text
       new_cupon.shared_count = template.shared_count
       new_cupon.sharable_limit = template.sharable_limit
-      new_cupon.sharable_template = template.sharable_template
       new_cupon.sharable_from  = template.sharable_from
       new_cupon.sharable_to  = template.sharable_to
 
     elsif template.kind == "CONSUMIBLE"
       new_cupon.kind = "CONSUMIBLE"
-      new_cupon.consumible = template.consumible
       new_cupon.consumible_text = template.consumible_text
       new_cupon.consumed_count = template.consumed_count
       new_cupon.consumible_limit = template.consumible_limit
-      new_cupon.consumible_template = template.consumible_template
       new_cupon.consumible_from  = template.consumible_from
       new_cupon.consumible_to  = template.consumible_to
     end
+    new_cupon.save
   end
 
   def self.getCupons(user_id)

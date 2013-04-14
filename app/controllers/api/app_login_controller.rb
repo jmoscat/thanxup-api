@@ -2,7 +2,7 @@ class Api::AppLoginController < ApplicationController
   skip_before_filter :verify_authenticity_token
   respond_to :json
 
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"AAACEdEose0cBAPK3vMJhWnXblFs8JT5dTkA1vm0PeKkhnSQx5ONiLrNZAejsXQfLPy2iMHCuDTeSufZBvAhu3KIuyYsRwBB1rwGSqvCwZDZD"}' http://localhost:3000/api/app_login.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"BAAB9AVEidO0BAASdyBebBCjSwwkP4mKqQYD9bT2i1jroeTEcGX3S1GDqGNH6ZAS6ZCG5bou54fEOjzzK5np42AYLHvDphNq2j2zwOqOBVDpEWdNSota8JCndoC7D9dSUybbFLP3QQDSGOymWGDSTFgmxJZAY8wRgc2Buh2sW5QLqtyHa5AgKAXUEekxHeeiI8l31noVuAZDZD"}' http://localhost:3000/api/app_login.json
     #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"100005420705218","fb_access_token":"AAACEdEose0cBAJZCx4z04AlUM3TC3TK07Xr9wqqJbIAANqTimpKfDnO6KXp6ArtapQMWmuM51SZCV4T1b5JT2mfuTh99efnZBTiqeagr0oZCR74Y0hGV"}' http://localhost:3000/api/app_login.json
 
 
