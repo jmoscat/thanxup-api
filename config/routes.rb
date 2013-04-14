@@ -6,10 +6,11 @@ ThanxupApi::Application.routes.draw do
   namespace :api do
     resources :app_login,:only => [:create, :destroy]
   end
-
+ 
   match '/getinfluence' => 'profileData#getInfluence'
   match '/getvenue' => 'profileData#getVenue'
   match '/checkin' => 'profileData#checkin'
+  match '/getcupons' => 'profileData#getCupons'
 
   root :to => "home#index"
   # The priority is based upon order of creation:
