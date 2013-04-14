@@ -40,14 +40,7 @@ gem 'slim'
 gem 'sinatra', :require => nil
 gem 'sprockets'
 
-#Memcache
-gem 'memcached'
-
-#Calendar
-gem 'bootstrap-datepicker-rails'
-
-#Riak
-gem 'ripple', '~> 1.0.0.beta2'
+#rest-client / rest-client
 
 #Social Media gems
 gem 'twitter-text'
