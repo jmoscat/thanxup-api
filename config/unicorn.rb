@@ -5,4 +5,4 @@ worker_processes (rails_env == 'production' ? 16 : 4)
 preload_app true
 timeout 90
 
-listen 8080
+listen 80

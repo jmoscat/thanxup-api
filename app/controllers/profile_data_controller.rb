@@ -2,12 +2,13 @@ class ProfileDataController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"Jqomaqibzs1iBHN2FE3N"}' http://localhost:3000/getinfluence.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"PzXrybCsXnUT4yi4kCYf"}' http://localhost:8080/getinfluence.json
 
   def getInfluence
   	@user = current_user
   	@user.update_info_recal_influence #delete after trials
-    render :status=>200, :json=>{:influence=> @user.influence}
+    influence = (@user.influence*100).round
+    render :status=>200, :json=>{:influence=> influence}
   end
 
 
