@@ -17,19 +17,11 @@ class CuponTemplate
 
 # Sharable information
 
-  field :sharable_text, type: String
-  field :shared_count, type: Integer, default: ""
-  field :sharable_limit, type: Integer
-  field :sharable_offer, type: String
-  field :sharable_from, type: Date
-  field :sharable_to, type: Date
-
-# Consumible information
-	field :consumible_text, type: String
-  field :consumed_count, type: Integer, default: ""
-  field :consumible_limit, type: Integer
-  field :consumible_offer, type: String
-  field :consumible_from, type: Date
-  field :consumible_to, type: Date
+  field :social_text, type: String
+  field :social_count, type: Integer, default: ""
+  field :social_limit, type: Integer
+  field :social_offer, type: String
+  field :social_from, type: Date
+  field :social_until, type: Date
   embedded_in :offer
 end

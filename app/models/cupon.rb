@@ -17,20 +17,13 @@ class Cupon
   field :kind, type: String 
 
 # Sharable information
-  field :sharable_text, type: String
-  field :shared_count, type: Integer
-  field :sharable_limit, type: Integer
-  field :sharable_offer, type: String
-  field :sharable_from, type: Date
-  field :sharable_to, type: Date
+  field :social_text, type: String
+  field :social_count, type: Integer, default: ""
+  field :social_limit, type: Integer
+  field :social_offer, type: String
+  field :social_from, type: Date
+  field :social_until, type: Date
 
-# Consumible information
-	field :consumible_text, type: String
-  field :consumed_count, type: Integer
-  field :consumible_limit, type: Integer
-  field :consumible_offer, type: String
-  field :consumible_from, type: Date
-  field :consumible_to, type: Date
   
   index({user_fb_id: 1})
   index({ _id: 1}, { unique: true })
@@ -51,22 +44,12 @@ class Cupon
     new_cupon.valid_from = template.valid_from
     new_cupon.valid_until = template.valid_until
 
-    if template.kind == "SHARABLE"
-      new_cupon.kind = "SHARABLE"
-      new_cupon.sharable_text = template.sharable_text
-      new_cupon.shared_count = template.shared_count
-      new_cupon.sharable_limit = template.sharable_limit
-      new_cupon.sharable_from  = template.sharable_from
-      new_cupon.sharable_to  = template.sharable_to
-
-    elsif template.kind == "CONSUMIBLE"
-      new_cupon.kind = "CONSUMIBLE"
-      new_cupon.consumible_text = template.consumible_text
-      new_cupon.consumed_count = template.consumed_count
-      new_cupon.consumible_limit = template.consumible_limit
-      new_cupon.consumible_from  = template.consumible_from
-      new_cupon.consumible_to  = template.consumible_to
-    end
+    new_cupon.kind = template.kind
+    new_cupon.sharable_text = template.social_text
+    new_cupon.shared_count = template.social_count
+    new_cupon.sharable_limit = template.social_limit
+    new_cupon.social_from  = template.social_from
+    new_cupon.social_until  = template.social_until
     new_cupon.save
   end
 
