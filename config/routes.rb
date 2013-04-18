@@ -3,6 +3,9 @@ ThanxupApi::Application.routes.draw do
   devise_for :users
   #get '/mu-b7a80520-38574f1d-8d74f9b9-cd358b57', :to => proc { |env| [200, {}, ["42"]] }
 
+  resources :venue,:only => [:show]
+
+
   namespace :api do
     resources :app_login,:only => [:create, :destroy]
   end

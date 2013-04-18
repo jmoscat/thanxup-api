@@ -25,8 +25,8 @@ class ProfileDataController < ApplicationController
     @user = current_user
     venue_id = params[:venue_id]
     if @user.saveVisit(venue_id)
+      VenueVisit.perform_async(@user.user_uid, venue_id)
       render :status =>200, :json=> {:status => "Success"}
-      Venue.saveVisit(@user.user_uid, venue_id)
     else 
       render :status =>200, :json=> {:status => "Ya has hecho checkin hoy, gracias!"}
     end
