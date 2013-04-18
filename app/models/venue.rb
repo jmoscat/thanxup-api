@@ -8,6 +8,7 @@ class Venue
   field :place_id, type: String
   field :contact_name, type: String
   field :email, type: String
+  field :kind, type: String  #Copas, comida, etc...
   field :passcode, type: String
   field :image_link, type: String
   field :address, type: String
@@ -32,6 +33,8 @@ class Venue
         :venue_name => u.name , 
         :venue_web => u.web, 
         :venue_fb => u.fb_page, 
+        :venue_kind => u.kind,
+        :venue_icon => u.image_link,
         :venue_address => u.address, 
         :lat => u.latitude, 
         :lon => u.longitude,
