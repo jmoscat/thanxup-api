@@ -20,7 +20,7 @@ class ProfileDataController < ApplicationController
 		render :status =>200, :json=> Venue.getClosestVenues(lat,lon)
  	end
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"Jqomaqibzs1iBHN2FE3N", "venue_id":"121231"}' http://localhost:3000/checkin.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"spCdtaysYsGPPFEdcE4x", "venue_id":"121231"}' http://localhost:3000/checkin.json
   def checkin
     @user = current_user
     venue_id = params[:venue_id]
