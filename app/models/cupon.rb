@@ -45,9 +45,9 @@ class Cupon
     new_cupon.valid_until = template.valid_until
 
     new_cupon.kind = template.kind
-    new_cupon.sharable_text = template.social_text
-    new_cupon.shared_count = template.social_count
-    new_cupon.sharable_limit = template.social_limit
+    new_cupon.social_text = template.social_text
+    new_cupon.social_count = template.social_count
+    new_cupon.social_limit = template.social_limit
     new_cupon.social_from  = template.social_from
     new_cupon.social_until  = template.social_until
     new_cupon.save
