@@ -15,7 +15,7 @@ class Venue
   field :latitude, type: String
   field :longitude, type: String
   has_many :offers
-  embeds_many :venue_visits
+  has_many :venue_visits
 
   index({venue_id: 1}, {unique: true})
 

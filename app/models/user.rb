@@ -25,8 +25,7 @@ class User
   #field :weekly_shares, type:Integer
   index({user_uid: 1}, {unique: true, background: true})
 
-  embeds_many :cupons
-  embeds_many :visits
+  has_many :visits
 
 
 

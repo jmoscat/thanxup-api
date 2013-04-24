@@ -3,5 +3,5 @@ class Visit
   include Mongoid::Timestamps
   field :venue_id, type: String
   field :shared,   type: Boolean
-  embedded_in :user
+  belongs_to :user
 end
