@@ -6,7 +6,8 @@ class ProfileDataController < ApplicationController
 
   def getInfluence
   	@user = current_user
-  	@user.update_info_recal_influence #delete after trials
+  	#@user.update_info_recal_influence #delete after trials
+    #influence = (@user.weeklys.last.influence*100).round
     influence = (@user.influence*100).round
     render :status=>200, :json=>{:influence=> influence}
   end
@@ -35,6 +36,11 @@ class ProfileDataController < ApplicationController
     #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"Jqomaqibzs1iBHN2FE3N"}' http://localhost:3000/getcupons.json
   def getCupons
     render :status => 200, :json => Cupon.getCupons(current_user.user_uid)
+  end
+
+  def gethistory
+    @user = current_user
+    render :status => 200, :json => current_user.historical
   end
 
 

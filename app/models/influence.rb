@@ -1,5 +1,14 @@
 class Influence
 
+#Time consideration: Saved in UTC, 00:01 Mad time = 21:01 UTC
+#Run rake at 23:30 UTC Sunday => 01:30 MAD monday
+
+
+#On sundays:
+#1. Create new weekly (blank)
+#2. Calculate influence for end of week activity, update end-of week record (created 1weekago)
+#3. End of week influence to user profile.
+
 	def self.basicFacebookData(uid,graph)
 	 	user=User.find_by(user_uid: uid)
 	  profile = graph.get_object("me")
@@ -52,11 +61,21 @@ class Influence
     weighted_friends = (1- Math.exp(-0.795*friends))
     weighted_tags = (1- Math.exp(-1.35*tags_per_day))
 
-    user.influence = weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3
-    user.save
+    if (user.weeklies.nil?)
+      user.weeklies.push(Weekly.new)
+      user.influence = weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3
+      user.save
+    else
+      #calculate real influence based on last week
+      end_week = user.weeklies.ascending(:created_at).last
+      #end_week.influence = calc_influence
+      user.influence = calc_influence
+      user.save
+      user.weeklies.push(Weekly.new)
+
+    end
 
     #Push notificiation for new influence!
-
   end
 
 
@@ -78,10 +97,23 @@ class Influence
     return feed.count
   end
 
-  def self.getShares(user)
+  def self.getShares(user_id)
+    user=User.find_by(user_uid: uid)
+    time = DateTime.now.utc - 1.week
+    shares = user.visits.where(:created_at.gte => time).where(:shared => true).count
+    #Weekly.ascending(:created_at).last => newest!
+    return shares
   end
 
+  def self.getcuponshares(used_id)
+    user=User.find_by(user_uid: uid)
+    return user.weeklies.ascending(:created_at).last.shared_cupons
+  end
+
+
   def self.getFriendCupons(user)
+    user=User.find_by(user_uid: uid)
+    return user.weeklies.ascending(:created_at).last.consumed_ff_cupons
 
   end
 

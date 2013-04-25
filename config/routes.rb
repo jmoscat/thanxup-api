@@ -14,6 +14,7 @@ ThanxupApi::Application.routes.draw do
   match '/getvenue' => 'profileData#getVenue'
   match '/checkin' => 'profileData#checkin'
   match '/getcupons' => 'profileData#getCupons'
+  match '/gethistory' => 'profileData#gethistory'
 
   root :to => "home#index"
   # The priority is based upon order of creation:

@@ -40,24 +40,9 @@ class Api::AppLoginController < ApplicationController
         @user.ensure_authentication_token!
         render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
       end
-    elsif (Date.today - @user.updated_at.to_date).to_i < 7
-      @user.update_fb_token(fb_access_token)
-      @user.ensure_authentication_token!
-      render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
-    elsif ((Date.today - @user.updated_at.to_date).to_i >= 6) #&& Date.today.thursday?
-      @user.update_fb_token(fb_access_token)
-      #gets all Facebook data and calculates influence async
-      FacebookData.perform_async(@user.user_uid)
-      @user.ensure_authentication_token!
-      render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
-    elsif(Date.today - @user.updated_at.to_date).to_i >= 14
-      @user.update_fb_token(fb_access_token)
-      #gets all Facebook data and calculates influence async
-      FacebookData.perform_async(@user.user_uid)
-      @user.ensure_authentication_token!
-      render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
     else
-      render :status=>200, :json=>{:thanxup_token=>"No Auth needed"}
+      @user.ensure_authentication_token!
+      render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
       @user.update_fb_token(fb_access_token)
     end
 

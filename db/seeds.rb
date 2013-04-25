@@ -3,6 +3,8 @@
 		Venue.delete_all
 		Visit.delete_all
 		Offer.delete_all
+		CuponTemplate.delete_all
+		Weekly.delete_all
 		
 		new_venue = Venue.new(venue_id: '121231', kind: 'Copas',image_link: 'https://dl.dropboxusercontent.com/u/155213031/PACO.jpeg',name: 'Paco Bar', web: 'wwww.pacomola.com', fb_page: 'wwww.facebook.com/pacomola', address: 'Castellana 123, Madrid', place_id:'145768288146',latitude: '40.482471', longitude: '-3.955078')
 		new_venue.save

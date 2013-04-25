@@ -26,6 +26,7 @@ class User
   index({user_uid: 1}, {unique: true, background: true})
 
   has_many :visits
+  has_many :weeklies
 
 
 
@@ -64,20 +65,6 @@ class User
     self.save
   end
 
-
-  def update_info_recal_influence
-    graph = Koala::Facebook::API.new(self.fb_token)
-    Influence.basicFacebookData(self.user_uid,graph)
-    likes_per_day = (Influence.getWeeklyLikes(graph))/7.0
-    friends = (self.friend_count)/100.0
-
-    weighted_likes = (1- Math.exp(-0.795*likes_per_day))
-    weighted_friends = (1- Math.exp(-0.795*friends))
-
-    self.influence = weighted_likes*0.6 + weighted_friends*0.4
-    self.save
-  end
-
   def saveVisit(venue_id)
     #check if it has checkin already, checkin on facebook regardless...
     last_visit = self.visits.where(:venue_id => venue_id).last
@@ -108,6 +95,15 @@ class User
       return "CHECKIN STATUS: Shared"
     end
   end
+
+  def historical
+    self.weeklies.to_json(:only => [:created_at, :influence, :shared_cupons, :consumed_ff_cupons])
+  end
+
+  def self.getCupons(user_id)
+  user=User.find_by(user_uid: user_id
+  return Cupon.where(user_fb_id: user_id, used: false).to_json(:only => [ :_id, :store_id, :cupon_text, :valid_from, :valid_until, :kind ])
+end
 
 
 

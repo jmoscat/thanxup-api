@@ -51,17 +51,18 @@ class Venue
     venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id ,shared: true))
     venue.save
     user = User.find_by(user_uid:user_id)
-    
+    influence = user.influence
+    #influence = user.weeklies.last.influence
     #Launch offer
     offer = venue.offers.first
     if offer.nil?
       return "No offer"
     else
-      if user.influence > offer.influence_1 and user.influence <= offer.influence_2
+      if influence > offer.influence_1 and influence <= offer.influence_2
         template = offer.cupon_templates.find_by(template_id: "1")
-      elsif user.influence > offer.influence_2 and user.influence <= offer.influence_3
+      elsif influence > offer.influence_2 and influence <= offer.influence_3
         template = offer.cupon_templates.find_by(template_id: "2")
-      elsif user.influence > offer.influence_3
+      elsif influence > offer.influence_3
         template = offer.cupon_templates.find_by(template_id: "3")
       end  
       Cupon.cupon_from_template(template,user_id,venue_id)      
