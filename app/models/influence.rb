@@ -66,9 +66,9 @@ class Influence
       user.influence = weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3
       user.save
     else
-      #calculate real influence based on last week
+      #  calc_influence   calculate real influence based on last week
       end_week = user.weeklies.ascending(:created_at).last
-      #end_week.influence = calc_influence
+      end_week.influence = calc_influence
       user.influence = calc_influence
       user.save
       user.weeklies.push(Weekly.new)
@@ -117,6 +117,16 @@ class Influence
 
   end
 
-
+  def self.weekly
+    users = User.all
+    users.each do |x|
+      begin 
+        Influence.update_info_recal_influence(x.user_uid)
+      rescue => e
+        logger.warn "User "+x.user_uid+"not valid fb id"
+      end
+      sleep(3)
+    end
+  end
 
 end

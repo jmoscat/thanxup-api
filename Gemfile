@@ -34,6 +34,10 @@ gem 'unicorn'
 #Managing credit card/payments
 gem 'stripe'
 
+#Scheduler
+gem 'whenever', :require => false
+
+
 #Background worker
 gem 'sidekiq'
 gem 'slim'
