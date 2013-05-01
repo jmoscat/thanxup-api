@@ -101,9 +101,9 @@ class User
   end
 
   def self.getCupons(user_id)
-  user=User.find_by(user_uid: user_id
-  return Cupon.where(user_fb_id: user_id, used: false).to_json(:only => [ :_id, :store_id, :cupon_text, :valid_from, :valid_until, :kind ])
-end
+    user=User.find_by(user_uid: user_id)
+    return Cupon.where(user_fb_id: user_id, used: false).to_json(:only => [ :_id, :store_id, :cupon_text, :valid_from, :valid_until, :kind ])
+  end
 
 
 
