@@ -50,12 +50,12 @@ class Influence
 
     #Calculate influence
     likes = Influence.getWeeklyLikes(graph)
-    likes_per_day = likes/7.0
-    friends = (user.friend_count)/100.0
+    likes_per_day = likes/7.to_f
+    friends = (user.friend_count)/100.to_f
 
     #Get tags
     tags = Influence.getWeeklyTags(graph)
-    tags_per_day = tags/7.0
+    tags_per_day = tags/7.to_f
 
     weighted_likes = (1- Math.exp(-0.795*likes_per_day))
     weighted_friends = (1- Math.exp(-0.795*friends))
@@ -67,13 +67,19 @@ class Influence
       user.save
     else
       #  calc_influence   calculate real influence based on last week
-      calc_influence = 0.6*(weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3)
       end_week = user.weeklies.ascending(:created_at).last
-      end_week.influence = calc_influence
-      user.influence = calc_influence
-      user.save
-      user.weeklies.push(Weekly.new)
 
+      weighted_cupon_share = (1- Math.exp(-0.95*(end_week.shared_cupons/7.to_f)))
+      weighted_cupon_redeem = (1- Math.exp(-1.2*(end_week.consumed_ff_cupons/7.to_f)))
+
+      call_to_action = 0.6*(weighted_cupon_share*0.35 + weighted_cupon_redeem*0.65)
+      passive_influence = 0.4*(weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3)
+      puts passive_influence/0.4
+      end_week.influence = passive_influence + call_to_action
+      user.influence = passive_influence + call_to_action
+      user.save
+      end_week.save
+      user.weeklies.push(Weekly.new)
     end
 
     #Push notificiation for new influence!
@@ -89,13 +95,21 @@ class Influence
   			total_likes += x["likes"]["count"]
   		end
   	end
-   	return total_likes
+    if total_likes.nil? 
+      return 0
+    else
+      return total_likes
+    end
   end
 
   def self.getWeeklyTags(graph)
     since = (Time.now - 7.days).to_i 
     feed = graph.fql_query("SELECT post_id, actor_id, target_id, message FROM stream WHERE filter_key = 'others' AND source_id = me() AND created_time >" + since.to_s)
-    return feed.count
+    if feed.count.nil? 
+      return 0
+    else
+      return feed.count
+    end
   end
 
   def self.getShares(user_id)
@@ -103,7 +117,11 @@ class Influence
     time = DateTime.now.utc - 1.week
     shares = user.visits.where(:created_at.gte => time).where(:shared => true).count
     #Weekly.ascending(:created_at).last => newest!
-    return shares
+    if shares.nil? 
+      return 0 
+    else
+      return shares
+    end
   end
 
   def self.getcuponshares(used_id)

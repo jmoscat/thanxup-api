@@ -2,7 +2,7 @@ class Api::AppLoginController < ApplicationController
   skip_before_filter :verify_authenticity_token
   respond_to :json
 
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"BAACEdEose0cBAPhCiC2gpSpFOr5aeORCvSuGM2CFZAX6QHPgyp8UDrEWcKYRIe3rMstaSNesj0TKhZAptrkqoFDVhl1iNBYq1nIoBFVHPBQ4SyGcTbA0kckIPFr18SDeQqaeNnP3o7yXeDJAvZC9XEfMjgjNggl3XTz5q4ZAvYRGLNErQDtXiJAbqAZAzNLxmZBNvJoxUADAZDZD"}' http://localhost:8080/api/app_login.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","fb_access_token":"BAACEdEose0cBAH5kcqbGrx48LWZBs3Jghr4xs7n80mCo8GxTMZCjyxuRPGrkA41b1WlgQr49uZBA8lZCZCnMjAe7Y7nIfHTLMavJpCQ9k0DKv5swakOQAhnwxyyTPBz5V8ZCM8Sbg1yySBuiITjhHZCk7vaR4bU0xBZAJGrzJxZA0rERqlZAKB6x45VdDVK5pAtFaZBGE5u7ZBB8816JVZAUDqjXSe2bdV5hIA8rp1qkwwnoFZBgZDZD"}' http://localhost:3000/api/app_login.json
     #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"100005420705218","fb_access_token":"AAACEdEose0cBAJZCx4z04AlUM3TC3TK07Xr9wqqJbIAANqTimpKfDnO6KXp6ArtapQMWmuM51SZCV4T1b5JT2mfuTh99efnZBTiqeagr0oZCR74Y0hGV"}' http://localhost:3000/api/app_login.json
 
 
