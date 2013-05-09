@@ -21,7 +21,7 @@ gem 'mongoid'
 gem 'devise'
 gem 'cancan'
 gem 'omniauth'
-gem 'rest-client'
+gem 'rest-client', "~> 1.6.7"
 gem 'omniauth-facebook'
 
 #Upload Images

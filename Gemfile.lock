@@ -307,7 +307,7 @@ DEPENDENCIES
   pry
   rails (= 3.2.2)
   recaptcha
-  rest-client
+  rest-client (~> 1.6.7)
   rspec
   rspec-rails
   sass-rails (~> 3.2.3)
