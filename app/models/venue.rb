@@ -67,13 +67,13 @@ class Venue
       elsif influence > offer.influence_3
         template = offer.cupon_templates.find_by(template_id: "3")
       end  
-      Venue.cupon_from_template(template,user_id,venue_id)      
+      Venue.cupon_from_template(template,user_id,venue_id, user.name, venue.name)      
     end
     # Send notification to user
   end
 
-  def self.cupon_from_template(template, user_id, venue_id)
-    respond = RestClient.post "http://localhost:3000/api/template", {:user_id => user_id, :venue_id => venue_id, :cupon_text => template.cupon_text, :valid_from => template.valid_from, :valid_until => template.valid_until, :kind => template.kind, :social_text => template.social_text, :social_count => template.social_count, :social_limit => template.social_limit, :social_from => template.social_from, :social_until => template.social_until}.to_json, :content_type => :json, :accept => :json
+  def self.cupon_from_template(template, user_id, venue_id, user_name, venue_name)
+    respond = RestClient.post "http://localhost:3000/api/template", {:user_name => user_nam, :venue_name => venue_name, :user_id => user_id, :venue_id => venue_id, :cupon_text => template.cupon_text, :valid_from => template.valid_from, :valid_until => template.valid_until, :kind => template.kind, :social_text => template.social_text, :social_count => template.social_count, :social_limit => template.social_limit, :social_from => template.social_from, :social_until => template.social_until}.to_json, :content_type => :json, :accept => :json
     puts respond
 
   end
