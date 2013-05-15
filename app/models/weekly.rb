@@ -13,7 +13,7 @@ def addShared (count)
 	self.save
 end
 
-def consumed_ff_cupons
-	self.consumed_ff_cupons = self.consumed_ff_cupons + 1
+def consumed_ff_cupons (count)
+	self.consumed_ff_cupons = self.consumed_ff_cupons + count
 	self.save
 end
