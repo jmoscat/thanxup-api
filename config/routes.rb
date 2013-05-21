@@ -17,7 +17,9 @@ ThanxupApi::Application.routes.draw do
   match '/gethistory' => 'profileData#gethistory'
 
   match '/back/addshare' => 'back#addshare'
-  match '/back/addshare' => 'back#addconsume'
+  match '/back/addconsume' => 'back#addconsume'
+  match '/back/socialnotify' => 'back#socialnotify'
+  
   
   root :to => "home#index"
   # The priority is based upon order of creation:

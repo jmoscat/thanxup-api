@@ -91,7 +91,8 @@ class User
     if (venue.offers.last.nil?)
       return "CHECKIN STATUS: Saved, no offer to share"
     else
-      graph.put_wall_post(venue.offers.last.fb_post, {"place" => venue.place_id})
+      #https://developers.facebook.com/docs/reference/api/post/
+      graph.put_wall_post(venue.offers.last.fb_post, {"place" => venue.place_id, "application"=>"195410900598304"})
       return "CHECKIN STATUS: Shared"
     end
   end
@@ -105,6 +106,12 @@ class User
     return Cupon.where(user_fb_id: user_id, used: false).to_json(:only => [ :_id, :store_id, :cupon_text, :valid_from, :valid_until, :kind ])
   end
 
-
+  def self.notifyfriends(cupons, friends, user_id)
+    user=User.find_by(user_uid: user_id)
+    graph = Koala::Facebook::API.new(user.fb_token)
+    friends.each_with_index do |x, i|
+      puts x
+    end
+  end
 
 end

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.2'
 #recaptcha
 gem 'recaptcha', :require => 'recaptcha/rails'
-
+gem 'debugger'
 #Postgresql
 #gem 'pg'
 #gem 'postgres_ext'
