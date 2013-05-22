@@ -11,6 +11,7 @@ class Api::AppLoginController < ApplicationController
   def create
     uid = params[:uid]
     fb_access_token = params[:fb_access_token]
+    iphone_token = params[:iphone_token]
     if request.format != :json
       render :status=>406, :json=>{:message=>"The request must be json"}
       return
@@ -31,7 +32,7 @@ class Api::AppLoginController < ApplicationController
     @user=User.find_by(user_uid: uid.downcase)
 
     if @user.nil? #if USER is new
-      @user = User.create_new(uid, fb_access_token)
+      @user = User.create_new(uid, fb_access_token,iphone_token)
       if @user.nil? #access_token failed or UID was not valid (user is not created)
         logger.info("Failed to create user, uid not valid")
         render :status=>401, :json=>{:message=>"Failed to create user, uid not valid"}

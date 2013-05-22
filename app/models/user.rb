@@ -8,6 +8,7 @@ class User
   field :authentication_token, type: String
   field :name, type: String
   field :email, type: String
+  field :gender, type: String
   field :location_name, type: String
   field :location_id, type: String
   field :DOB, type: Date
@@ -41,7 +42,7 @@ class User
   attr_accessible :uid, :fb_access_token, :remember_me
   
 
-  def self.create_new(fb_uid, fb_token)
+  def self.create_new(fb_uid, fb_token, iphone_token)
   	graph = Koala::Facebook::API.new(fb_token)
   	profile = graph.get_object("me")
 
@@ -50,6 +51,7 @@ class User
   	else
   		new_user = User.new
   		new_user.user_uid = fb_uid
+      new_user.iphone_id = iphone_token
   		new_user.fb_token = fb_token
   		new_user.save
 

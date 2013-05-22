@@ -14,6 +14,7 @@ class Influence
 	  profile = graph.get_object("me")
 	  user.email = profile["email"]
 	  user.name = profile["name"]
+    user.gender = profile["gender"]
     location = profile["location"]
     if location.nil?
       user.location_name = ""
@@ -30,13 +31,12 @@ class Influence
     end
     
 	  #get_friends
-	  friends = Array.new
-	  graph.get_connections("me","friends",:fields =>"id").each do |x|
-	    friends << x["id"]
-	  end
-
-	  user.fb_friends = friends
-	  user.friend_count = friends.count
+	#  friends = Array.new
+	 # graph.get_connections("me","friends",:fields =>"id").each do |x|
+	  #  friends << x["id"]
+	 # end
+    feed = graph.fql_query("SELECT friend_count FROM user WHERE uid = " + uid)
+	  user.friend_count = feed[0]["friend_count"]
 	  user.save
 
 	end
