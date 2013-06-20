@@ -33,7 +33,7 @@ class ProfileDataController < ApplicationController
     end
   end
 
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"Jqomaqibzs1iBHN2FE3N"}' http://localhost:3000/getcupons.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"Jqomaqibzs1iBHN2FE3N"}' http://localhost:3000/gethistory.json
   def getCupons
     render :status => 200, :json => Cupon.getCupons(current_user.user_uid)
   end

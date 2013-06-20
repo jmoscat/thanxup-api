@@ -19,8 +19,8 @@ class User
   field :NN_thanxup_friends, type: Array
 
   field :influence, type: Float
-  field :iphone_id, type: Integer # for push notifications
-  field :android_id, type: Integer # for push notifications
+  field :iphone_id, type: String # for push notifications
+  field :android_id, type: String # for push notifications
   #field :consumed_friends_cupons_overall, type: Integer
   #field :consumed_frined_cupons_week, type: Integer
   #field :weekly_shares, type:Integer
@@ -108,7 +108,7 @@ class User
     return Cupon.where(user_fb_id: user_id, used: false).to_json(:only => [ :_id, :store_id, :cupon_text, :valid_from, :valid_until, :kind ])
   end
 
-  def self.notifyfriends(cupons, friends, user_id)
+  def self.notifyfriends(cupons, friends, user_id, venue_id)
     user=User.find_by(user_uid: user_id)
     graph = Koala::Facebook::API.new(user.fb_token)
     friends.each_with_index do |x, i|
