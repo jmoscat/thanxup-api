@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.2'
 #recaptcha
 gem 'recaptcha', :require => 'recaptcha/rails'
-
+gem 'debugger'
 #Postgresql
 #gem 'pg'
 #gem 'postgres_ext'
@@ -21,7 +21,7 @@ gem 'mongoid'
 gem 'devise'
 gem 'cancan'
 gem 'omniauth'
-gem 'rest-client'
+gem 'rest-client', "~> 1.6.7"
 gem 'omniauth-facebook'
 
 #Upload Images
@@ -33,6 +33,10 @@ gem 'unicorn'
 
 #Managing credit card/payments
 gem 'stripe'
+
+#Scheduler
+gem 'whenever', :require => false
+
 
 #Background worker
 gem 'sidekiq'
