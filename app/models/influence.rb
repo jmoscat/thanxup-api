@@ -65,10 +65,18 @@ class Influence
       user.weeklies.push(Weekly.new)
       user.influence = weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3
       user.save
+      respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> user.iphone_id}, :data => {:alert => "Your influence has been calculated!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
+
     else
       #  calc_influence   calculate real influence based on last week
       end_week = user.weeklies.ascending(:created_at).last
-
+      #end_week = user.weeklies.descending(:created_at).limit(3)
+      shared_total  = 0
+      redeem_total = 0
+      end_week.each do |x|
+        shared_total = shared_total + x.shared_cupons
+        redeem_total = redeem_total + x.consumed_ff_cupons
+      end
       weighted_cupon_share = (1- Math.exp(-0.95*(end_week.shared_cupons/7.to_f)))
       weighted_cupon_redeem = (1- Math.exp(-1.2*(end_week.consumed_ff_cupons/7.to_f)))
 
@@ -81,8 +89,6 @@ class Influence
       end_week.save
       user.weeklies.push(Weekly.new)
     end
-
-    #Push notificiation for new influence!
   end
 
 
@@ -141,6 +147,7 @@ class Influence
     users.each do |x|
       begin 
         Influence.update_info_recal_influence(x.user_uid)
+        Notification.influence_notify(x.iphone_id)
       rescue => e
         puts "User "+x.user_uid+"not valid fb id"
       end
