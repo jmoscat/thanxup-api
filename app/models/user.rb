@@ -8,6 +8,7 @@ class User
   field :authentication_token, type: String
   field :name, type: String
   field :email, type: String
+  field :gender, type: String
   field :location_name, type: String
   field :location_id, type: String
   field :DOB, type: Date
@@ -18,15 +19,15 @@ class User
   field :NN_thanxup_friends, type: Array
 
   field :influence, type: Float
-  field :iphone_id, type: Integer # for push notifications
-  field :android_id, type: Integer # for push notifications
+  field :iphone_id, type: String # for push notifications
+  field :android_id, type: String # for push notifications
   #field :consumed_friends_cupons_overall, type: Integer
   #field :consumed_frined_cupons_week, type: Integer
   #field :weekly_shares, type:Integer
   index({user_uid: 1}, {unique: true, background: true})
 
-  embeds_many :cupons
-  embeds_many :visits
+  has_many :visits
+  has_many :weeklies
 
 
 
@@ -41,7 +42,7 @@ class User
   attr_accessible :uid, :fb_access_token, :remember_me
   
 
-  def self.create_new(fb_uid, fb_token)
+  def self.create_new(fb_uid, fb_token, iphone_token)
   	graph = Koala::Facebook::API.new(fb_token)
   	profile = graph.get_object("me")
 
@@ -50,6 +51,7 @@ class User
   	else
   		new_user = User.new
   		new_user.user_uid = fb_uid
+      new_user.iphone_id = iphone_token
   		new_user.fb_token = fb_token
   		new_user.save
 
@@ -62,20 +64,6 @@ class User
 
   def update_fb_token(fb_token)
     self.fb_token = fb_token
-    self.save
-  end
-
-
-  def update_info_recal_influence
-    graph = Koala::Facebook::API.new(self.fb_token)
-    Influence.basicFacebookData(self.user_uid,graph)
-    likes_per_day = (Influence.getWeeklyLikes(graph))/7.0
-    friends = (self.friend_count)/100.0
-
-    weighted_likes = (1- Math.exp(-0.795*likes_per_day))
-    weighted_friends = (1- Math.exp(-0.795*friends))
-
-    self.influence = weighted_likes*0.6 + weighted_friends*0.4
     self.save
   end
 
@@ -105,11 +93,27 @@ class User
     if (venue.offers.last.nil?)
       return "CHECKIN STATUS: Saved, no offer to share"
     else
-      graph.put_wall_post(venue.offers.last.fb_post, {"place" => venue.place_id})
+      #https://developers.facebook.com/docs/reference/api/post/
+      graph.put_wall_post(venue.offers.last.fb_post, {"place" => venue.place_id, "application"=>"195410900598304"})
       return "CHECKIN STATUS: Shared"
     end
   end
 
+  def historical
+    self.weeklies.to_json(:only => [:created_at, :influence, :shared_cupons, :consumed_ff_cupons])
+  end
 
+  def self.getCupons(user_id)
+    user=User.find_by(user_uid: user_id)
+    return Cupon.where(user_fb_id: user_id, used: false).to_json(:only => [ :_id, :store_id, :cupon_text, :valid_from, :valid_until, :kind ])
+  end
+
+  def self.notifyfriends(cupons, friends, user_id, venue_id)
+    user=User.find_by(user_uid: user_id)
+    graph = Koala::Facebook::API.new(user.fb_token)
+    friends.each_with_index do |x, i|
+      puts x
+    end
+  end
 
 end
