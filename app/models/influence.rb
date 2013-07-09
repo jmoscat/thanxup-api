@@ -68,25 +68,32 @@ class Influence
       respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> user.iphone_id}, :data => {:alert => "Your influence has been calculated!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
 
     else
-      #  calc_influence   calculate real influence based on last week
-      end_week = user.weeklies.ascending(:created_at).last
-      #end_week = user.weeklies.descending(:created_at).limit(3)
-      shared_total  = 0
-      redeem_total = 0
-      end_week.each do |x|
-        shared_total = shared_total + x.shared_cupons
-        redeem_total = redeem_total + x.consumed_ff_cupons
-      end
+      week4 = user.weeklies.descending(:created_at).limit(4)
+      end_week = week4[0]
+
       weighted_cupon_share = (1- Math.exp(-0.95*(end_week.shared_cupons/7.to_f)))
       weighted_cupon_redeem = (1- Math.exp(-1.2*(end_week.consumed_ff_cupons/7.to_f)))
 
       call_to_action = 0.6*(weighted_cupon_share*0.35 + weighted_cupon_redeem*0.65)
       passive_influence = 0.4*(weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3)
-      puts passive_influence/0.4
-      end_week.influence = passive_influence + call_to_action
+
+      week_influence = (passive_influence + call_to_action)
+
+      if week4.count != 4
+        total = week_influence
+        week4.each do |x|
+          total = total + x.influence
+        end
+        end_week.influence = total/(week4.count.to_f)
+      else
+        end_week.influence = (week_influence + week4[1].influence + week4[2].influence + week4[3].influence)/4.0
+      end
+      end_week.influence = (passive_influence + call_to_action)
       user.influence = passive_influence + call_to_action
       user.save
       end_week.save
+
+      #Once the current week is updated, create a new week
       user.weeklies.push(Weekly.new)
     end
   end

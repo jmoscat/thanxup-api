@@ -3,9 +3,9 @@ class Notification
   	 respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> iphone_id}, :data => {:alert => "Tienes nueva influencia!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
   end
 
-  def self.shared_notify (sender_name, reciever_id)
+  def self.shared_notify (sender_id, reciever_id)
   	reciever = User.find_by(user_uid: reciever_id)
-  	sender = User.find_by(user_uid: sender_name)
+  	sender = User.find_by(user_uid: sender_id)
   	message = sender.name + "acaba de compartir un cupon contigo!"
   	respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> reciever.iphone_id}, :data => {:alert => "Tienes nueva influencia!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
   end

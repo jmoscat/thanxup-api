@@ -1,7 +1,7 @@
 class Weekly
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :influence, type: Float
+  field :influence, type: Float, ,  default: 0.0
   field :shared_cupons, type: Integer,  default: 0
   field :consumed_ff_cupons, type: Integer, default: 0
   belongs_to :user
