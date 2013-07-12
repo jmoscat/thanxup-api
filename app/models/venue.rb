@@ -16,6 +16,7 @@ class Venue
   field :address, type: String
   field :latitude, type: String
   field :longitude, type: String
+  field :avatar, type: String
   has_many :offers
   has_many :venue_visits
 

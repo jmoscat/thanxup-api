@@ -113,7 +113,7 @@ class User
       if User.find_by(user_uid: x).nil?
         Notifications.fb_notify(user_id, x, cupons[i], venue_id)
       else
-        Notifications.shared_notify (user_id, x)
+        Notifications.shared_notify(user_id, x)
       end
     end
   end
