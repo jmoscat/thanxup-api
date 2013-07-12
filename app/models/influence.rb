@@ -150,9 +150,9 @@ class Influence
   end
 
   def self.weekly
-    users = User.all
-    users.each do |x|
-      begin 
+    
+    User.each do |x|
+      begin
         Influence.update_info_recal_influence(x.user_uid)
         Notification.influence_notify(x.iphone_id)
       rescue => e
