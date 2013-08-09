@@ -126,7 +126,7 @@ class Influence
   end
 
   def self.getShares(user_id)
-    user=User.find_by(user_uid: uid)
+    user=User.find_by(user_uid: user_id)
     time = DateTime.now.utc - 1.week
     shares = user.visits.where(:created_at.gte => time).where(:shared => true).count
     #Weekly.ascending(:created_at).last => newest!
@@ -138,13 +138,13 @@ class Influence
   end
 
   def self.getcuponshares(used_id)
-    user=User.find_by(user_uid: uid)
+    user=User.find_by(user_uid: used_id)
     return user.weeklies.ascending(:created_at).last.shared_cupons
   end
 
 
-  def self.getFriendCupons(user)
-    user=User.find_by(user_uid: uid)
+  def self.getFriendCupons(user_id)
+    user=User.find_by(user_uid: user_id)
     return user.weeklies.ascending(:created_at).last.consumed_ff_cupons
 
   end

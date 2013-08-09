@@ -15,7 +15,7 @@ class BackController < ApplicationController
 
 	def socialnotify
 		NotifyFriends.perform_async(params[:cupons], params[:friends], params[:user_id], params[:venue_id])
-		render :status => 200
+		render :status => 200, :json=> {:status => "Success"}
 	end
 
 end
