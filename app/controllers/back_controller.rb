@@ -18,4 +18,9 @@ class BackController < ApplicationController
 		render :status => 200, :json=> {:status => "Success"}
 	end
 
+	def getmobile
+		user=User.find_by(user_uid: params[:user_id])
+		render :status => 200, :json=> {:mobile => user.iphone_id}
+	end
+
 end
