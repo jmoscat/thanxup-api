@@ -52,8 +52,6 @@ class Venue
     #We should also check here if user has checkin already...later on...
     venue = Venue.find_by(venue_id: venue_id)
     count = VenueVisit.where(user_fb_id: user_id).count
-    venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id, visit_count: count, shared: true))
-    venue.save
     user = User.find_by(user_uid:user_id)
     influence = user.influence
     #Launch offer
@@ -69,6 +67,8 @@ class Venue
         template = offer.cupon_templates.find_by(template_id: "3")
       end  
       Venue.cupon_from_template(template,user_id,venue_id, user.name, venue.name, venue.passcode)      
+      venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id, visit_count: count, shared: true))
+      venue.save
     end
     # Send notification to user
   end
