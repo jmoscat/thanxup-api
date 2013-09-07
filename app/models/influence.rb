@@ -63,38 +63,50 @@ class Influence
 
     if (user.weeklies.count == 0)
       user.weeklies.push(Weekly.new)
-      user.influence = weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3
+      #0.7 to reduce a little bit original influence
+      user.influence = 0.7*(weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3) 
       user.save
       respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> user.iphone_id}, :data => {:alert => "Your influence has been calculated!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
 
     else
+      #need to check for only one week past
       week4 = user.weeklies.descending(:created_at).limit(4)
+      count_weeks = week4.count(true)
       end_week = week4[0]
+      old_comp_influence = user.influence
 
       weighted_cupon_share = (1- Math.exp(-0.95*(end_week.shared_cupons/7.to_f)))
       weighted_cupon_redeem = (1- Math.exp(-1.2*(end_week.consumed_ff_cupons/7.to_f)))
 
       call_to_action = 0.6*(weighted_cupon_share*0.35 + weighted_cupon_redeem*0.65)
-      passive_influence = 0.4*(weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3)
+      passive_influence = 0.4*(weighted_likes*0.45 + weighted_tags*0.35 + weighted_friends*0.2)
 
       week_influence = (passive_influence + call_to_action)
+      total = week_influence
 
-      if week4.count != 4
-        total = week_influence
-        week4.each do |x|
-          total = total + x.influence
+      if (count_weeks > 1) #If more than one week
+        (1..(count_weeks - 1)).each do |i| # take all except the newest weekly
+          total =  total.to_f + week4[i]["influence"]
         end
-        end_week.influence = total/(week4.count.to_f)
-      else
-        end_week.influence = (week_influence + week4[1].influence + week4[2].influence + week4[3].influence)/4.0
+        average_influence = total /count_weeks.to_f
+      else #During the first week do not change influence daily until first sunday
+        average_influence = (old_comp_influence)
       end
-      end_week.influence = (passive_influence + call_to_action)
-      user.influence = passive_influence + call_to_action
-      user.save
-      end_week.save
+      
+      if Time.now.monday?
+        end_week.influence = average_influence
+        end_week.save
+        user.weeklies.push(Weekly.new)
+      end
 
-      #Once the current week is updated, create a new week
-      user.weeklies.push(Weekly.new)
+      user.influence = average_influence
+      user.save
+
+      if (average_influence > old_comp_influence)
+        return true
+      else
+        return false
+      end
     end
   end
 
@@ -149,14 +161,15 @@ class Influence
 
   end
 
-  def self.weekly
+  def self.daily
     
     User.each do |x|
       begin
-        Influence.update_info_recal_influence(x.user_uid)
-        Notification.influence_notify(x.iphone_id)
+        if (Influence.update_info_recal_influence(x.user_uid))
+          Notification.influence_notify(x.iphone_id)
+        end
       rescue => e
-        puts "User "+x.user_uid+"not valid fb id"
+        puts x.user_uid+": something went wrong..."
       end
       sleep(3)
     end

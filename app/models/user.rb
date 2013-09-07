@@ -18,6 +18,8 @@ class User
   field :thanxup_friends, type: Array
   field :NN_thanxup_friends, type: Array
 
+  field :login_times, type: Integer
+
   field :influence, type: Float
   field :iphone_id, type: String # for push notifications
   field :android_id, type: String # for push notifications

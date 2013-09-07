@@ -1,7 +1,7 @@
 class Notification
   def self.influence_notify(iphone_id)
     #, :badge => "1"
-  	 respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> iphone_id}, :data => {:alert => "Tienes nueva influencia!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
+  	 respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> iphone_id}, :data => {:alert => "Tu influencia ha aumentado, yeeah!!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
      puts respond
   end
 
