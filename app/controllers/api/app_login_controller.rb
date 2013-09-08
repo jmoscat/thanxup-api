@@ -2,7 +2,7 @@ class Api::AppLoginController < ApplicationController
   skip_before_filter :verify_authenticity_token
   respond_to :json
 
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286", "iphone_token":"1231231","fb_access_token":"CAACEdEose0cBAFb7KKfkVvbieftwVkad8pGOP1CQnvPyZAyFq42C6yPxuvyfwmhZBUHrREcuURyyUMrvWi2lri6SmFxKQdhZCj4J4wWyi7y9OgrFFgZCNtG5ozciS39YhctLO8SFPk6hiOKsTRhLaShJJiZAe5m8ZD"}' http://localhost:3000/api/app_login.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286", "iphone_token":"1231231","fb_access_token":"CAACEdEose0cBADdwqp1LTHeRwZBOltmxc9CZChEpzb7070bgXkqZAb4lYbwCbxarhnAOhePgyko2EEf91nbZByR7llFy8paitT39n775iZBDPNwsSShc6UGV2CE6N2eUYQcDvDpBcKRd54f1NAEYWZAn9gVdDtxPUefAkLEHe8J6XLCAfn96uI9ZBhkzTelUCO9Evh9xdUnpAZDZD"}' http://localhost:3000/api/app_login.json
     #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"100005420705218","fb_access_token":"AAACEdEose0cBAJZCx4z04AlUM3TC3TK07Xr9wqqJbIAANqTimpKfDnO6KXp6ArtapQMWmuM51SZCV4T1b5JT2mfuTh99efnZBTiqeagr0oZCR74Y0hGV"}' http://localhost:3000/api/app_login.json
 
 
