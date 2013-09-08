@@ -43,8 +43,9 @@ class Api::AppLoginController < ApplicationController
       end
     else
       @user.ensure_authentication_token!
-      render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
+      @user.update_iphone_token(iphone_token)
       @user.update_fb_token(fb_access_token)
+      render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
     end
 
     # http://rdoc.info/github/plataformatec/devise/master/Devise/Models/TokenAuthenticatable

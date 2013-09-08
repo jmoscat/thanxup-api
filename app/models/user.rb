@@ -69,6 +69,11 @@ class User
     self.save
   end
 
+  def update_iphone_token(iphoneid)
+    self.iphone_id = iphoneid
+    self.save
+  end
+
   def saveVisit(venue_id)
     #check if it has checkin already, checkin on facebook regardless...
     last_visit = self.visits.where(:venue_id => venue_id).last
