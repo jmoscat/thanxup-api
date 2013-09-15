@@ -57,14 +57,17 @@ class Influence
     tags = Influence.getWeeklyTags(graph)
     tags_per_day = tags/7.to_f
 
+
     weighted_likes = (1- Math.exp(-0.795*likes_per_day))
     weighted_friends = (1- Math.exp(-0.795*friends))
     weighted_tags = (1- Math.exp(-1.35*tags_per_day))
 
+
+
     if (user.weeklies.count == 0)
       user.weeklies.push(Weekly.new)
       #0.7 to reduce a little bit original influence
-      user.influence = 0.7*(weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3) 
+      user.influence = 0.70*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
       user.save
       respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> user.iphone_id}, :data => {:alert => "Your influence has been calculated!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
 
@@ -75,11 +78,22 @@ class Influence
       end_week = week4[0]
       old_comp_influence = user.influence
 
+      #Cupons
       weighted_cupon_share = (1- Math.exp(-0.95*(end_week.shared_cupons/7.to_f)))
       weighted_cupon_redeem = (1- Math.exp(-1.2*(end_week.consumed_ff_cupons/7.to_f)))
 
-      call_to_action = 0.6*(weighted_cupon_share*0.35 + weighted_cupon_redeem*0.65)
-      passive_influence = 0.4*(weighted_likes*0.45 + weighted_tags*0.35 + weighted_friends*0.2)
+      #Get checkins
+      checkins = user.visits.count
+      checkins_per_day = checkins/7.to_f
+      weighted_checkins = (1- Math.exp(-4.6*checkins_per_day))
+      if(friends < 20)
+        weighted_checkins_pond = weighted_checkins*0.5
+      else
+        weighted_checkins_pond = weighted_checkins*(friends/200.0)
+      end
+
+      call_to_action = 0.30*(weighted_cupon_share*0.35 + weighted_cupon_redeem*0.65)
+      passive_influence = 0.70*(weighted_likes*0.35 + weighted_checkins_pond*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
 
       week_influence = (passive_influence + call_to_action)
       total = week_influence

@@ -4,19 +4,21 @@ class Venue
   include Mongoid::Document
   include Mongoid::Timestamps
   field :venue_id, type: String
-  field :name, type: String
-  field :web, type: String
-  field :fb_page, type: String
-  field :place_id, type: String
-  field :contact_name, type: String
-  field :email, type: String
+  field :name, type: String, default: ""
+  field :web, type: String, default: ""
+  field :fb_page, type: String, default: ""
+  field :place_id, type: String, default: ""
+  field :contact_name, type: String, default: ""
+  field :email, type: String, default: ""
   # 0: cafe, 1:copas, 2:restaurante
-  field :kind, type: String  #Copas, comida, etc...
-  field :passcode, type: String
-  field :image_link, type: String
-  field :address, type: String
-  field :latitude, type: String
-  field :longitude, type: String
+  field :kind, type: String, default: ""  #Copas, comida, etc...
+  field :passcode, type: String, default: ""
+  field :image_link, type: String, default: ""
+  field :address, type: String, default: ""
+  field :telf, type: String, default: ""
+  field :time, type: String, default: ""
+  field :latitude, type: String, default: ""
+  field :longitude, type: String, default: ""
   field :avatar, type: String
   has_many :offers
   has_many :venue_visits
@@ -44,7 +46,10 @@ class Venue
         :lon => u.longitude,
         :offer_day => u.image_link, 
         :offer_text => text,
-        :kind => u.kind
+        :kind => u.kind,
+        :time => u.time,
+        :telf => u.telf,
+        :address => u.address
       }
     end
     return venue_respond.to_json
