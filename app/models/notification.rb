@@ -17,7 +17,7 @@ class Notification
     graph = Koala::Facebook::API.new(user.fb_token)
     venue = Venue.where(:venue_id => venue_id).last
     url = "http://coupon.thanxup.com/cupon/"+cupon_id
-    graph.put_wall_post("Hey, acabo de pasarte un cupon a traves de ThanxUp! :)", {"place" => venue.place_id,"tags" => reciever_id, "application" => "195410900598304", "link" => url, "name" => "ThanxUp Social Coupon"})
+    graph.put_wall_post("Hey, acabo de pasarte un cupon a traves de #ThanxUp! :)", {"place" => venue.place_id,"tags" => reciever_id, "application" => "195410900598304", "link" => url, "name" => "ThanxUp Social Coupon"})
   end
 
 end

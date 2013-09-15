@@ -101,6 +101,7 @@ class User
       return "CHECKIN STATUS: Saved, no offer to share"
     else
       #https://developers.facebook.com/docs/reference/api/post/
+      post = venue.offers.last.fb_post + " - via #ThanxUp"
       graph.put_wall_post(venue.offers.last.fb_post, {"place" => venue.place_id, "application"=>"195410900598304"})
       return "CHECKIN STATUS: Shared"
     end

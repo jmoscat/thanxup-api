@@ -10,6 +10,7 @@ class Venue
   field :place_id, type: String
   field :contact_name, type: String
   field :email, type: String
+  # 0: cafe, 1:copas, 2:restaurante
   field :kind, type: String  #Copas, comida, etc...
   field :passcode, type: String
   field :image_link, type: String
@@ -27,7 +28,7 @@ class Venue
     venue_respond = []
     venues.each do |u|
       if u.offers.first.nil?
-        text = "No hay ninguna ahora mismo pero haz checkin para que nos acordemos de ti!"
+        text = "No hay ninguna oferta ahora mismo pero haz checkin para que nos acordemos de ti!"
       else
         text = u.offers.first.offer_text
       end
@@ -42,7 +43,8 @@ class Venue
         :lat => u.latitude, 
         :lon => u.longitude,
         :offer_day => u.image_link, 
-        :offer_text => text
+        :offer_text => text,
+        :kind => u.kind
       }
     end
     return venue_respond.to_json
