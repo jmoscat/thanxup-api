@@ -2,7 +2,7 @@ class ProfileDataController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"PzXrybCsXnUT4yi4kCYf"}' http://localhost:8080/getinfluence.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"iTwDA2MqNAk45qXFyx8z"}' http://api.thanxup.com/getinfluence.json
 
   def getInfluence
     x = current_user.login_times + 1 

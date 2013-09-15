@@ -51,6 +51,8 @@ class Influence
     #Calculate influence
     likes = Influence.getWeeklyLikes(graph)
     likes_per_day = likes/7.to_f
+
+
     friends = (user.friend_count)/100.to_f
 
     #Get tags
@@ -67,7 +69,7 @@ class Influence
     if (user.weeklies.count == 0)
       user.weeklies.push(Weekly.new)
       #0.7 to reduce a little bit original influence
-      user.influence = 0.70*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
+      user.influence = 0.75*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
       user.save
       respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> user.iphone_id}, :data => {:alert => "Your influence has been calculated!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
 
@@ -83,13 +85,13 @@ class Influence
       weighted_cupon_redeem = (1- Math.exp(-1.2*(end_week.consumed_ff_cupons/7.to_f)))
 
       #Get checkins
-      checkins = user.visits.count
+      checkins = user.visits.where(:created_at.gt => (Time.now.utc - 7.days)).count(true)
       checkins_per_day = checkins/7.to_f
       weighted_checkins = (1- Math.exp(-4.6*checkins_per_day))
       if(friends < 20)
         weighted_checkins_pond = weighted_checkins*0.5
       else
-        weighted_checkins_pond = weighted_checkins*(friends/200.0)
+        weighted_checkins_pond = weighted_checkins*(user.friend_count/200.0)
       end
 
       call_to_action = 0.30*(weighted_cupon_share*0.35 + weighted_cupon_redeem*0.65)
@@ -102,11 +104,20 @@ class Influence
         (1..(count_weeks - 1)).each do |i| # take all except the newest weekly
           total =  total.to_f + week4[i]["influence"]
         end
-        average_influence = total /count_weeks.to_f
+        average_influence = total/count_weeks.to_f
       else #During the first week do not change influence daily until first sunday
-        average_influence = (old_comp_influence)
+        average_influence = (old_comp_influence + average_influence)/2.0
       end
-      
+
+      #----------------------------------------------#
+      #DEV, do not chage influence unless increase
+      if (average_influence > old_comp_influence)
+        average_influence = average_influence
+      else
+        average_influence = old_comp_influence
+      end
+      #----------------------------------------------#
+
       if Time.now.monday?
         end_week.influence = average_influence
         end_week.save
