@@ -5,9 +5,9 @@ class ProfileDataController < ApplicationController
   #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"iTwDA2MqNAk45qXFyx8z"}' http://api.thanxup.com/getinfluence.json
 
   def getInfluence
-    x = current_user.login_times + 1 
-  	current_user.login_times = x
-    current_user.save
+    #x = current_user.login_times+1 
+  	#current_user.login_times = x
+    #current_user.save
 
   	#@user.update_info_recal_influence #delete after trials
     #influence = (@user.weeklys.last.influence*100).round
