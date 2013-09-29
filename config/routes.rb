@@ -19,6 +19,7 @@ ThanxupApi::Application.routes.draw do
   match '/back/addshare' => 'back#addshare'
   match '/back/addconsume' => 'back#addconsume'
   match '/back/socialnotify' => 'back#socialnotify'
+  match '/back/getmobile'   => 'back#getmobile'
   
   
   root :to => "home#index"

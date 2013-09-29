@@ -51,43 +51,87 @@ class Influence
     #Calculate influence
     likes = Influence.getWeeklyLikes(graph)
     likes_per_day = likes/7.to_f
+
+
     friends = (user.friend_count)/100.to_f
 
     #Get tags
     tags = Influence.getWeeklyTags(graph)
     tags_per_day = tags/7.to_f
 
+
     weighted_likes = (1- Math.exp(-0.795*likes_per_day))
     weighted_friends = (1- Math.exp(-0.795*friends))
     weighted_tags = (1- Math.exp(-1.35*tags_per_day))
 
+
+
     if (user.weeklies.count == 0)
       user.weeklies.push(Weekly.new)
-      user.influence = weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3
+      #0.7 to reduce a little bit original influence
+      user.influence = 0.75*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
       user.save
       respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> user.iphone_id}, :data => {:alert => "Your influence has been calculated!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
 
     else
-      #  calc_influence   calculate real influence based on last week
-      end_week = user.weeklies.ascending(:created_at).last
-      #end_week = user.weeklies.descending(:created_at).limit(3)
-      shared_total  = 0
-      redeem_total = 0
-      end_week.each do |x|
-        shared_total = shared_total + x.shared_cupons
-        redeem_total = redeem_total + x.consumed_ff_cupons
-      end
+      #need to check for only one week past
+      week4 = user.weeklies.descending(:created_at).limit(4)
+      count_weeks = week4.count(true)
+      end_week = week4[0]
+      old_comp_influence = user.influence
+
+      #Cupons
       weighted_cupon_share = (1- Math.exp(-0.95*(end_week.shared_cupons/7.to_f)))
       weighted_cupon_redeem = (1- Math.exp(-1.2*(end_week.consumed_ff_cupons/7.to_f)))
 
-      call_to_action = 0.6*(weighted_cupon_share*0.35 + weighted_cupon_redeem*0.65)
-      passive_influence = 0.4*(weighted_likes*0.4 + weighted_tags*0.3 + weighted_friends*0.3)
-      puts passive_influence/0.4
-      end_week.influence = passive_influence + call_to_action
-      user.influence = passive_influence + call_to_action
+      #Get checkins
+      checkins = user.visits.where(:created_at.gt => (Time.now.utc - 7.days)).count(true)
+      checkins_per_day = checkins/7.to_f
+      weighted_checkins = (1- Math.exp(-4.6*checkins_per_day))
+      if(friends < 20)
+        weighted_checkins_pond = weighted_checkins*0.5
+      else
+        weighted_checkins_pond = weighted_checkins*(user.friend_count/200.0)
+      end
+
+      call_to_action = 0.30*(weighted_cupon_share*0.35 + weighted_cupon_redeem*0.65)
+      passive_influence = 0.70*(weighted_likes*0.35 + weighted_checkins_pond*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
+
+      week_influence = (passive_influence + call_to_action)
+      total = week_influence
+
+      if (count_weeks > 1) #If more than one week
+        (1..(count_weeks - 1)).each do |i| # take all except the newest weekly
+          total =  total.to_f + week4[i]["influence"]
+        end
+        average_influence = total/count_weeks.to_f
+      else #During the first week do not change influence daily until first sunday
+        average_influence = (old_comp_influence + average_influence)/2.0
+      end
+
+      #----------------------------------------------#
+      #DEV, do not chage influence unless increase
+      if (average_influence > old_comp_influence)
+        average_influence = average_influence
+      else
+        average_influence = old_comp_influence
+      end
+      #----------------------------------------------#
+
+      if Time.now.monday?
+        end_week.influence = average_influence
+        end_week.save
+        user.weeklies.push(Weekly.new)
+      end
+
+      user.influence = average_influence
       user.save
-      end_week.save
-      user.weeklies.push(Weekly.new)
+
+      if (average_influence > old_comp_influence)
+        return true
+      else
+        return false
+      end
     end
   end
 
@@ -119,7 +163,7 @@ class Influence
   end
 
   def self.getShares(user_id)
-    user=User.find_by(user_uid: uid)
+    user=User.find_by(user_uid: user_id)
     time = DateTime.now.utc - 1.week
     shares = user.visits.where(:created_at.gte => time).where(:shared => true).count
     #Weekly.ascending(:created_at).last => newest!
@@ -131,25 +175,26 @@ class Influence
   end
 
   def self.getcuponshares(used_id)
-    user=User.find_by(user_uid: uid)
+    user=User.find_by(user_uid: used_id)
     return user.weeklies.ascending(:created_at).last.shared_cupons
   end
 
 
-  def self.getFriendCupons(user)
-    user=User.find_by(user_uid: uid)
+  def self.getFriendCupons(user_id)
+    user=User.find_by(user_uid: user_id)
     return user.weeklies.ascending(:created_at).last.consumed_ff_cupons
 
   end
 
-  def self.weekly
-    users = User.all
-    users.each do |x|
-      begin 
-        Influence.update_info_recal_influence(x.user_uid)
-        Notification.influence_notify(x.iphone_id)
+  def self.daily
+    
+    User.each do |x|
+      begin
+        if (Influence.update_info_recal_influence(x.user_uid))
+          Notification.influence_notify(x.iphone_id)
+        end
       rescue => e
-        puts "User "+x.user_uid+"not valid fb id"
+        puts x.user_uid+": something went wrong..."
       end
       sleep(3)
     end

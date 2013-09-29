@@ -4,18 +4,22 @@ class Venue
   include Mongoid::Document
   include Mongoid::Timestamps
   field :venue_id, type: String
-  field :name, type: String
-  field :web, type: String
-  field :fb_page, type: String
-  field :place_id, type: String
-  field :contact_name, type: String
-  field :email, type: String
-  field :kind, type: String  #Copas, comida, etc...
-  field :passcode, type: String
-  field :image_link, type: String
-  field :address, type: String
-  field :latitude, type: String
-  field :longitude, type: String
+  field :name, type: String, default: ""
+  field :web, type: String, default: ""
+  field :fb_page, type: String, default: ""
+  field :place_id, type: String, default: ""
+  field :contact_name, type: String, default: ""
+  field :email, type: String, default: ""
+  # 0: cafe, 1:copas, 2:restaurante
+  field :kind, type: String, default: ""  #Copas, comida, etc...
+  field :passcode, type: String, default: ""
+  field :image_link, type: String, default: ""
+  field :address, type: String, default: ""
+  field :telf, type: String, default: ""
+  field :time, type: String, default: ""
+  field :latitude, type: String, default: ""
+  field :longitude, type: String, default: ""
+  field :avatar, type: String
   has_many :offers
   has_many :venue_visits
 
@@ -26,7 +30,7 @@ class Venue
     venue_respond = []
     venues.each do |u|
       if u.offers.first.nil?
-        text = "No hay ninguna ahora mismo pero haz checkin para que nos acordemos de ti!"
+        text = "No hay ninguna oferta ahora mismo pero haz checkin para que nos acordemos de ti!"
       else
         text = u.offers.first.offer_text
       end
@@ -41,7 +45,11 @@ class Venue
         :lat => u.latitude, 
         :lon => u.longitude,
         :offer_day => u.image_link, 
-        :offer_text => text
+        :offer_text => text,
+        :kind => u.kind,
+        :time => u.time,
+        :telf => u.telf,
+        :address => u.address
       }
     end
     return venue_respond.to_json
@@ -50,8 +58,7 @@ class Venue
   def self.saveVisit(user_id, venue_id)
     #We should also check here if user has checkin already...later on...
     venue = Venue.find_by(venue_id: venue_id)
-    venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id ,shared: true))
-    venue.save
+    count = VenueVisit.where(user_fb_id: user_id).count
     user = User.find_by(user_uid:user_id)
     influence = user.influence
     #Launch offer
@@ -67,12 +74,19 @@ class Venue
         template = offer.cupon_templates.find_by(template_id: "3")
       end  
       Venue.cupon_from_template(template,user_id,venue_id, user.name, venue.name, venue.passcode)      
+      venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id, visit_count: count, shared: true))
+      venue.save
     end
     # Send notification to user
   end
 
   def self.cupon_from_template(template, user_id, venue_id, user_name, venue_name, venue_pass)
-    respond = RestClient.post "http://coupon.thanxup.com/api/template", {:user_name => user_name, :venue_name => venue_name, :venue_pass => venue_pass ,:user_id => user_id, :venue_id => venue_id, :cupon_text => template.cupon_text, :valid_from => template.valid_from, :valid_until => template.valid_until, :kind => template.kind, :social_text => template.social_text, :social_count => template.social_count, :social_limit => template.social_limit, :social_from => template.social_from, :social_until => template.social_until}.to_json, :content_type => :json, :accept => :json
+    if Rails.env.development?
+      url = ENV["DEV_CUPON"]
+    elsif Rails.env.production?
+      url = ENV["PROD_CUPON"]
+    end
+    respond = RestClient.post url, {:user_name => user_name, :venue_name => venue_name, :venue_pass => venue_pass ,:user_id => user_id, :venue_id => venue_id, :cupon_text => template.cupon_text, :valid_from => template.valid_from, :valid_until => template.valid_until, :kind => template.kind, :social_text => template.social_text, :social_count => template.social_count, :social_limit => template.social_limit, :social_from => template.social_from, :social_until => template.social_until}.to_json, :content_type => :json, :accept => :json
     puts respond
   end
 
