@@ -20,6 +20,11 @@
 # Learn more: http://github.com/javan/whenever
 
 
-every :sunday, :at => '11:30 pm' do # Use any day of the week or :weekend, :weekday
-  runner "Influence.weekly"
+#every :sunday, :at => '11:30 pm' do # Use any day of the week or :weekend, :weekday
+#  runner "Influence.daily"
+#end
+
+
+every :day, :at => '1:00 pm' do
+  rake "daily"
 end
