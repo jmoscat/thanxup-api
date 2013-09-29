@@ -4,6 +4,8 @@ gem 'rails', '3.2.2'
 #recaptcha
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'debugger'
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'newrelic_rpm'
 #Postgresql
 #gem 'pg'
 #gem 'postgres_ext'

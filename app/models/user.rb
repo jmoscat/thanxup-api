@@ -18,6 +18,8 @@ class User
   field :thanxup_friends, type: Array
   field :NN_thanxup_friends, type: Array
 
+  field :login_times, type: Integer
+
   field :influence, type: Float
   field :iphone_id, type: String # for push notifications
   field :android_id, type: String # for push notifications
@@ -67,6 +69,11 @@ class User
     self.save
   end
 
+  def update_iphone_token(iphoneid)
+    self.iphone_id = iphoneid
+    self.save
+  end
+
   def saveVisit(venue_id)
     #check if it has checkin already, checkin on facebook regardless...
     last_visit = self.visits.where(:venue_id => venue_id).last
@@ -94,6 +101,7 @@ class User
       return "CHECKIN STATUS: Saved, no offer to share"
     else
       #https://developers.facebook.com/docs/reference/api/post/
+      post = venue.offers.last.fb_post + " - via #ThanxUp"
       graph.put_wall_post(venue.offers.last.fb_post, {"place" => venue.place_id, "application"=>"195410900598304"})
       return "CHECKIN STATUS: Shared"
     end
@@ -109,11 +117,12 @@ class User
   end
 
   def self.notifyfriends(cupons, friends, user_id, venue_id)
-    user=User.find_by(user_uid: user_id)
-    graph = Koala::Facebook::API.new(user.fb_token)
     friends.each_with_index do |x, i|
-      puts x
+      if User.find_by(user_uid: x).nil?
+        Notification.fb_notify(user_id, x, cupons[i], venue_id)
+      else
+        Notification.shared_notify(user_id, x)
+      end
     end
   end
-
 end
