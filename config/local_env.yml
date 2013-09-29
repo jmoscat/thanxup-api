@@ -1,0 +1,11 @@
+# Rename this file to local_env.yml
+# Add account settings and API keys here.
+# This file should be listed in .gitignore to keep your settings secret!
+# Each entry gets set as a local environment variable.
+# This file overrides ENV variables in the Unix shell.
+# For example, setting:
+# GMAIL_USERNAME: 'Your_Gmail_Username'
+# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
+DEV_CUPON: 'http://localhost:3000/api/template'
+STAGE_CUPON: 'http://localhost:3000/api/template'
+PROD_CUPON: 'http://coupon.thanxup.com/api/template'

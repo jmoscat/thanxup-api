@@ -24,10 +24,10 @@ class ProfileDataController < ApplicationController
 		render :status =>200, :json=> Venue.getClosestVenues(lat,lon)
  	end
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"spCdtaysYsGPPFEdcE4x", "venue_id":"121231"}' http://localhost:3000/checkin.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"iTwDA2MqNAk45qXFyx8z", "venue_id":"121231"}' http://localhost:3001/checkin.json
   def checkin
     venue_id = params[:venue_id]
-    if current_usersaveVisit(venue_id)
+    if current_user.saveVisit(venue_id)
       VenueSavevisit.perform_async(current_user.user_uid, venue_id)
       render :status =>200, :json=> {:status => "Success"}
     else 
@@ -35,7 +35,7 @@ class ProfileDataController < ApplicationController
     end
   end
 
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"Jqomaqibzs1iBHN2FE3N"}' http://localhost:3000/gethistory.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"iTwDA2MqNAk45qXFyx8z"}' http://localhost:3001/gethistory.json
   def getCupons
     render :status => 200, :json => Cupon.getCupons(current_user.user_uid)
   end
