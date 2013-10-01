@@ -102,7 +102,11 @@ class User
     else
       #https://developers.facebook.com/docs/reference/api/post/
       post = venue.offers.last.fb_post + " - via #ThanxUp"
-      graph.put_wall_post(venue.offers.last.fb_post, {"place" => venue.place_id, "application"=>"195410900598304"})
+      if (venue.place_id.nil? or venue.place_id.empty?)
+        graph.put_wall_post(post, {"link" => venue.fb_page, "description" => venue.name,"application"=>"195410900598304"})
+      else
+        graph.put_wall_post(post, {"place" => venue.place_id, "application"=>"195410900598304"})
+      end
       return "CHECKIN STATUS: Shared"
     end
   end
