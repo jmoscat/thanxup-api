@@ -4,7 +4,7 @@ ThanxupApi::Application.routes.draw do
   #get '/mu-b7a80520-38574f1d-8d74f9b9-cd358b57', :to => proc { |env| [200, {}, ["42"]] }
 
   resources :venue,:only => [:show]
-
+  match '/place/site/:id'  => 'venue#site'
 
   namespace :api do
     resources :app_login,:only => [:create, :destroy]
