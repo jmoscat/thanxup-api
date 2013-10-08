@@ -10,7 +10,7 @@ class Venue
   field :place_id, type: String, default: ""
   field :contact_name, type: String, default: ""
   field :email, type: String, default: ""
-  # 0: cafe, 1:copas, 2:restaurante
+  # 0: cafe, 1:copas, 2:restaurante, 3 textil
   field :kind, type: String, default: ""  #Copas, comida, etc...
   field :passcode, type: String, default: ""
   field :image_link, type: String, default: ""
@@ -31,20 +31,21 @@ class Venue
     venues.each do |u|
       if u.offers.first.nil?
         text = "No hay ninguna oferta ahora mismo pero haz checkin para que nos acordemos de ti!"
+        fb = ""
       else
         text = u.offers.first.offer_text
+        fb = u.offers.first.fb_post
       end
       venue_respond << {
         :venue_id => u.venue_id, 
-        :venue_name => u.name , 
-        :venue_web => u.web, 
-        :venue_fb => u.fb_page, 
+        :venue_name => u.name, 
+        :venue_web => u.web,
         :venue_kind => u.kind,
         :venue_icon => u.image_link,
         :venue_address => u.address, 
+        :fb_post => fb,
         :lat => u.latitude, 
-        :lon => u.longitude,
-        :offer_day => u.image_link, 
+        :lon => u.longitude, 
         :offer_text => text,
         :kind => u.kind,
         :time => u.time,

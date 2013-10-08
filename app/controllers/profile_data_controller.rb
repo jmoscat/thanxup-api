@@ -11,7 +11,7 @@ class ProfileDataController < ApplicationController
 
   	#@user.update_info_recal_influence #delete after trials
     #influence = (@user.weeklys.last.influence*100).round
-    influence = (current_user.influence*100).round
+    influence = (current_user.influence*100.0).round
     render :status=>200, :json=>{:influence=> influence}
   end
 
@@ -29,9 +29,9 @@ class ProfileDataController < ApplicationController
     venue_id = params[:venue_id]
     if current_user.saveVisit(venue_id)
       VenueSavevisit.perform_async(current_user.user_uid, venue_id)
-      render :status =>200, :json=> {:status => "Success"}
+      render :status =>200, :json=> {:status => "Compartido! Thanx :)"}
     else 
-      render :status =>200, :json=> {:status => "Ya has hecho checkin hoy, tomorrow mas!"}
+      render :status =>200, :json=> {:status => "Ya has hecho checkin hoy..."}
     end
   end
 
