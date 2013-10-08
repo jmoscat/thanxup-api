@@ -56,6 +56,10 @@
 			social_from: "Sat, 18 May 2013 09:17:57 -0700",
 			social_until:  "Tue, 21 May 2013 09:17:57 -0700"
 			)
+		
+		offer.cupon_templates.push(cupon1)
+		offer.cupon_templates.push(cupon2)
+		offer.cupon_templates.push(cupon3)
 
 
 		new_venue = Venue.new(venue_id: '121232', passcode: "123",kind: '0',image_link: 'https://dl.dropboxusercontent.com/u/155213031/PACO.jpeg',name: 'Tacos Bar', web: 'wwww.tacbar.com', fb_page: 'wwww.facebook.com/tacobar', address: 'Juan Sanchez 16', place_id:'145768288146',latitude: '41.482471', longitude: '-4.955078')
