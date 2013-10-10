@@ -199,5 +199,4 @@ class Influence
       sleep(3)
     end
   end
-
 end
