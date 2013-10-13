@@ -59,7 +59,9 @@ class Venue
   def self.saveVisit(user_id, venue_id)
     #We should also check here if user has checkin already...later on...
     venue = Venue.find_by(venue_id: venue_id)
-    count = VenueVisit.where(user_fb_id: user_id).count
+    #Save visit with current count of visit (including this one)
+    count = VenueVisit.where(user_fb_id: user_id).count(true)
+    count = count + 1
     user = User.find_by(user_uid:user_id)
     influence = user.influence
     #Launch offer

@@ -165,7 +165,7 @@ class Influence
   def self.getShares(user_id)
     user=User.find_by(user_uid: user_id)
     time = DateTime.now.utc - 1.week
-    shares = user.visits.where(:created_at.gte => time).where(:shared => true).count
+    shares = user.visits.where(:created_at.gte => time).where(:shared => true).count(true)
     #Weekly.ascending(:created_at).last => newest!
     if shares.nil? 
       return 0 
@@ -186,15 +186,17 @@ class Influence
 
   end
 
-  def self.daily
-    
+  def self.daily 
+    new_logger = Logger.new('log/influence.log')
+    new_logger.info("DAILY RUTINE- "+ Time.now.to_s+ " ")
     User.each do |x|
       begin
         if (Influence.update_info_recal_influence(x.user_uid))
           Notification.influence_notify(x.iphone_id)
         end
+        new_logger.info("\t SUCCESS: "+ x.user_uid)
       rescue => e
-        puts x.user_uid+": something went wrong..."
+        new_logger.info("\t FAILED: "+ x.user_uid)
       end
       sleep(3)
     end
