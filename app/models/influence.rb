@@ -106,7 +106,7 @@ class Influence
         end
         average_influence = total/count_weeks.to_f
       else #During the first week do not change influence daily until first sunday
-        average_influence = (old_comp_influence + average_influence)/2.0
+        average_influence = (old_comp_influence + total)/2.0
       end
 
       #----------------------------------------------#
