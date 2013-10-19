@@ -76,20 +76,20 @@ class Venue
       elsif influence > offer.influence_3
         template = offer.cupon_templates.find_by(template_id: "3")
       end  
-      Venue.cupon_from_template(template,user_id,venue_id, user.name, venue.name, venue.passcode)      
+      Venue.cupon_from_template(template,user_id,venue_id,user.name, venue.name, venue.passcode, venue.kind, venue.address)      
       venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id, visit_count: count, shared: true))
       venue.save
     end
     # Send notification to user
   end
 
-  def self.cupon_from_template(template, user_id, venue_id, user_name, venue_name, venue_pass)
+  def self.cupon_from_template(template, user_id, venue_id, user_name, venue_name, venue_pass, venue_kind, venue_address)
     if Rails.env.development?
       url = ENV["DEV_CUPON"]
     elsif Rails.env.production?
       url = ENV["PROD_CUPON"]
     end
-    respond = RestClient.post url, {:user_name => user_name, :venue_name => venue_name, :venue_pass => venue_pass ,:user_id => user_id, :venue_id => venue_id, :cupon_text => template.cupon_text, :valid_from => template.valid_from, :valid_until => template.valid_until, :kind => template.kind, :social_text => template.social_text, :social_count => template.social_count, :social_limit => template.social_limit, :social_from => template.social_from, :social_until => template.social_until}.to_json, :content_type => :json, :accept => :json
+    respond = RestClient.post url, {:user_name => user_name, :venue_name => venue_name,:venue_kind => venue_kind, :venue_address => venue_address  ,:venue_pass => venue_pass ,:user_id => user_id, :venue_id => venue_id, :cupon_text => template.cupon_text, :valid_from => template.valid_from, :valid_until => template.valid_until, :kind => template.kind, :social_text => template.social_text, :social_count => template.social_count, :social_limit => template.social_limit, :social_from => template.social_from, :social_until => template.social_until}.to_json, :content_type => :json, :accept => :json
     puts respond
   end
 
