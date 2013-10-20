@@ -23,4 +23,9 @@ class BackController < ApplicationController
 		render :status => 200, :json=> {:mobile => user.iphone_id}
 	end
 
+	def notifycupon
+		user = User.find_by(user_uid: params[:user_id])
+		Notification.cupon_notify(user.iphone_id)
+		render :status => 200, :json=>{:status => "ok"}
+	end
 end

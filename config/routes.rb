@@ -20,6 +20,7 @@ ThanxupApi::Application.routes.draw do
   match '/back/addconsume' => 'back#addconsume'
   match '/back/socialnotify' => 'back#socialnotify'
   match '/back/getmobile'   => 'back#getmobile'
+  match '/back/notifycupon' => 'back#notifycupon'
   
   
   root :to => "home#index"

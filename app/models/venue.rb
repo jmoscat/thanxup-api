@@ -77,7 +77,7 @@ class Venue
         template = offer.cupon_templates.find_by(template_id: "3")
       end  
       Venue.cupon_from_template(template,user_id,venue_id,user.name, venue.name, venue.passcode, venue.kind, venue.address)      
-      venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, user_fb_id: user_id, visit_count: count, shared: true))
+      venue.venue_visits.push(VenueVisit.new(venue_id: venue_id, venue_raw_id: venue_id ,user_fb_id: user_id, visit_count: count, shared: true))
       venue.save
     end
     # Send notification to user

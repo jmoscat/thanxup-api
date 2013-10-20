@@ -53,7 +53,7 @@ class Influence
     likes_per_day = likes/7.to_f
 
 
-    friends = (user.friend_count)/100.to_f
+    friends = (user.friend_count.to_f)/100.to_f
 
     #Get tags
     tags = Influence.getWeeklyTags(graph)
