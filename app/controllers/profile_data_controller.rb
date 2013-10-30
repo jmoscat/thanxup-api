@@ -11,6 +11,7 @@ class ProfileDataController < ApplicationController
 
   	#@user.update_info_recal_influence #delete after trials
     #influence = (@user.weeklys.last.influence*100).round
+    current_user.login_times
     influence = (current_user.influence*100.0).round
     render :status=>200, :json=>{:influence=> influence}
   end
@@ -44,7 +45,15 @@ class ProfileDataController < ApplicationController
     render :status => 200, :json => current_user.historical
   end
 
+  def delete
+    User.delete_user(current_user)
+    render :status =>200, :json=> {:status => "Success"}
+  end
 
+  def signout
+    current_user.signout
+    render :status =>200, :json=> {:status => "Success"}
+  end
 
 
 end
