@@ -19,6 +19,7 @@ class User
   field :NN_thanxup_friends, type: Array
 
   field :login_times, type: Integer
+  field :notify, type: Boolean, default: true
 
   field :influence, type: Float
   field :iphone_id, type: String # for push notifications
@@ -129,4 +130,28 @@ class User
       end
     end
   end
+
+  def self.delete_user(user_thx)
+    user=User.find_by(user_uid: user_thx.user_uid)
+    user.weeklies.delete_all
+    user.visits.delete_all
+    if !(VenueVisit.find_by(user_fb_id: user_thx.user_uid).nil?)
+      VenueVisit.find_by(user_uid: user_thx.user_uid).delete_all
+    end
+    user.delete
+  end
+
+  def login_times
+    self.login_times = self.login_times +1
+    self.save
+  end
+
+  def signout
+    self.notify = false
+    self.save
+  end
+
+
+
+
 end

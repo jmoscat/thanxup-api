@@ -15,7 +15,9 @@ ThanxupApi::Application.routes.draw do
   match '/checkin' => 'profileData#checkin'
   match '/getcupons' => 'profileData#getCupons'
   match '/gethistory' => 'profileData#gethistory'
-
+  match '/delete' => 'profileData#delete'
+  match '/signout' => 'profileData#signout'
+  
   match '/back/addshare' => 'back#addshare'
   match '/back/addconsume' => 'back#addconsume'
   match '/back/socialnotify' => 'back#socialnotify'
