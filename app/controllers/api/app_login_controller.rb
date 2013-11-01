@@ -43,6 +43,7 @@ class Api::AppLoginController < ApplicationController
       end
     else
       @user.ensure_authentication_token!
+      @user.setactive
       @user.update_iphone_token(iphone_token)
       @user.update_fb_token(fb_access_token)
       render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}

@@ -190,13 +190,15 @@ class Influence
     new_logger = Logger.new('log/influence.log')
     new_logger.info("DAILY RUTINE- "+ Time.now.to_s+ " ")
     User.each do |x|
-      begin
-        if (Influence.update_info_recal_influence(x.user_uid))
-          Notification.influence_notify(x.iphone_id)
+      if x.active
+        begin
+          if (Influence.update_info_recal_influence(x.user_uid))
+            Notification.influence_notify(x.iphone_id)
+          end
+          new_logger.info("\t SUCCESS: "+ x.user_uid)
+        rescue => e
+          new_logger.info("\t FAILED: "+ x.user_uid)
         end
-        new_logger.info("\t SUCCESS: "+ x.user_uid)
-      rescue => e
-        new_logger.info("\t FAILED: "+ x.user_uid)
       end
       sleep(3)
     end

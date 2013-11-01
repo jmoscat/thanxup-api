@@ -23,9 +23,7 @@ ThanxupApi::Application.routes.draw do
   match '/back/socialnotify' => 'back#socialnotify'
   match '/back/getmobile'   => 'back#getmobile'
   match '/back/notifycupon' => 'back#notifycupon'
-  
-  
-  root :to => "home#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
