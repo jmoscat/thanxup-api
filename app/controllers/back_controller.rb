@@ -28,4 +28,7 @@ class BackController < ApplicationController
 		Notification.cupon_notify(user.iphone_id)
 		render :status => 200, :json=>{:status => "ok"}
 	end
+
+	def getoffers
+	end
 end

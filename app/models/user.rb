@@ -146,7 +146,7 @@ class User
     #user.delete
   end
 
-  def login_times
+  def logintimes
     self.login_times = self.login_times +1
     self.save
   end

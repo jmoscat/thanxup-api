@@ -22,4 +22,8 @@ class Offer
   belongs_to :venue
 
 
+  def getoffer
+  end
+
+
 end
