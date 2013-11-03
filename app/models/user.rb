@@ -147,7 +147,7 @@ class User
   end
 
   def logintimes
-    self.login_times = self.login_times +1
+    self.login_times = self.login_times + 1 
     self.save
   end
 
