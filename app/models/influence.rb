@@ -154,7 +154,8 @@ class Influence
 
   def self.getWeeklyTags(graph)
     since = (Time.now - 7.days).to_i 
-    feed = graph.fql_query("SELECT post_id, actor_id, target_id, message FROM stream WHERE filter_key = 'others' AND source_id = me() AND created_time >" + since.to_s)
+    #only tags done by others
+    feed = graph.fql_query("SELECT post_id, actor_id, target_id, message FROM stream WHERE filter_key = 'others' AND source_id = me() AND actor_id != me() AND created_time >" + since.to_s)
     if feed.count.nil? 
       return 0
     else
