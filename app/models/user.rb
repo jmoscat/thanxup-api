@@ -18,7 +18,7 @@ class User
   field :thanxup_friends, type: Array
   field :NN_thanxup_friends, type: Array
 
-  field :login_times, type: Integer
+  field :login_times, type: Integer, default: 0
 
   #Checks
   field :notify, type: Boolean, default: true
@@ -156,7 +156,17 @@ class User
     self.save
   end
 
-  def signout
+  def setinactive
+    self.active = true
+    self.save
+  end
+
+  def setnotifytrue
+    self.notify = true
+    self.save
+  end
+
+  def setnotifyfalse
     self.notify = false
     self.save
   end

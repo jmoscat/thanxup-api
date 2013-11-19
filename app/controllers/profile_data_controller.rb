@@ -46,12 +46,12 @@ class ProfileDataController < ApplicationController
   end
 
   def delete
-    User.delete_user(current_user)
+    
     render :status =>200, :json=> {:status => "Success"}
   end
 
   def signout
-    current_user.signout
+    current_user.setnotifyfalse
     render :status =>200, :json=> {:status => "Success"}
   end
 
