@@ -10,7 +10,7 @@ class Venue
   field :place_id, type: String, default: ""
   field :contact_name, type: String, default: ""
   field :email, type: String, default: ""
-  # 0: cafe, 1:copas, 2:restaurante, 3 textil
+  # 0: cafe, 1:copas, 2:restaurante, 3 cine, 4 man-clothing, 5 woman clothing 
   field :kind, type: String, default: ""  #Copas, comida, etc...
   field :passcode, type: String, default: ""
   field :image_link, type: String, default: ""
