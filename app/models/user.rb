@@ -157,7 +157,7 @@ class User
   end
 
   def setinactive
-    self.active = true
+    self.active = false
     self.save
   end
 
