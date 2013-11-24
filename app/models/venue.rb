@@ -17,20 +17,25 @@ class Venue
   field :address, type: String, default: ""
   field :telf, type: String, default: ""
   field :time, type: String, default: ""
+  field :location, :type => Array
+
   field :latitude, type: String, default: ""
   field :longitude, type: String, default: ""
   field :avatar, type: String
   has_many :offers
   has_many :venue_visits
-
+  index({ location: '2d' }, { min: -200, max: 200 })
   index({venue_id: 1}, {unique: true})
 
   def self.getClosestVenues(lat, lon)
-    venues = Venue.all
+    loc = []
+    loc << lat.to_f
+    loc << lon.to_f
+    venues = Venue.where(:location => {"$near" => loc})
     venue_respond = []
     venues.each do |u|
       if u.offers.first.nil?
-        text = "No hay ninguna oferta ahora mismo pero haz checkin para que nos acordemos de ti!"
+        text = "No hay ninguna oferta ahora mismo"
         fb = ""
       else
         text = u.offers.first.offer_text
@@ -44,8 +49,8 @@ class Venue
         :venue_icon => u.image_link,
         :venue_address => u.address, 
         :fb_post => fb,
-        :lat => u.latitude, 
-        :lon => u.longitude, 
+        :lat => u.location[0], 
+        :lon => u.location[1], 
         :offer_text => text,
         :kind => u.kind,
         :time => u.time,
