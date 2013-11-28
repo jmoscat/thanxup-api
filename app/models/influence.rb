@@ -41,6 +41,7 @@ class Influence
       user.friend_count = 1
     else
       user.friend_count = feed[0]["friend_count"]
+    end
 	  user.save
 
 	end
