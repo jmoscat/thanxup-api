@@ -62,7 +62,7 @@ class User
   		new_user.save
 
       #gets all Facebook data and calculates influence async
-      Influence.update_info_recal_influence(fb_uid)
+      FacebookData.perform_async(new_user.user_uid)
   		
       return new_user
   	end

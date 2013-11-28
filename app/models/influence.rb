@@ -69,7 +69,12 @@ class Influence
     if (user.weeklies.count == 0)
       user.weeklies.push(Weekly.new)
       #0.7 to reduce a little bit original influence
-      user.influence = 0.75*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
+      inf = 0.75*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
+      inf = inf.to_f
+      if (inf <= 0.001)
+        inf = 0.001
+      end
+      user.influence = inf
       user.save
       respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> user.iphone_id}, :data => {:alert => "Your influence has been calculated!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
 
