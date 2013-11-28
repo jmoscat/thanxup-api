@@ -38,7 +38,6 @@ class Api::AppLoginController < ApplicationController
         render :status=>401, :json=>{:message=>"Failed to create user, uid not valid"}
         return
       else
-        FacebookData.perform_async(uid)
         @user.ensure_authentication_token!
         render :status=>200, :json=>{:thanxup_token=>@user.authentication_token}
       end
