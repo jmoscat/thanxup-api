@@ -37,6 +37,10 @@ class Influence
 	 # end
     feed = graph.fql_query("SELECT friend_count FROM user WHERE uid = " + uid)
 	  user.friend_count = feed[0]["friend_count"]
+    if (feed[0]["friend_count"] == 0)
+      user.friend_count = 1
+    else
+      user.friend_count = feed[0]["friend_count"]
 	  user.save
 
 	end
@@ -47,7 +51,7 @@ class Influence
 
     #Get fresh basic user info
     Influence.basicFacebookData(user_id,graph)
-
+    user = User.find_by(user_uid: user_id)
     #Calculate influence
     likes = Influence.getWeeklyLikes(graph)
     likes_per_day = likes/7.to_f
@@ -71,9 +75,6 @@ class Influence
       #0.7 to reduce a little bit original influence
       inf = 0.75*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
       inf = inf.to_f
-      if (inf <= 0.001)
-        inf = 0.001
-      end
       user.influence = inf
       user.save
       respond = RestClient.post "https://api.parse.com/1/push", {:where => {:channels=> user.iphone_id}, :data => {:alert => "Your influence has been calculated!"}}.to_json, :content_type => :json, :accept => :json, 'X-Parse-Application-Id' => "IOzLLH4SETAMacFs2ITXJc5uOY0PJ70Ws9VDFyXk", 'X-Parse-REST-API-Key' => "yUIwUBNG9INsEDCG5HjVS9uw0QsddPdshPKonSAK"
