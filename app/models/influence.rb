@@ -146,7 +146,7 @@ class Influence
   def self.getWeeklyLikes(user_id, fb_id, fb_token,graph)
   	since = (Time.now - 7.days).to_i
   	count = 0
-    url = "https://graph.facebook.com/" +user_id+ "/posts?fields=likes.limit(1).summary(true)&since=1378160005&access_token="+fb_token
+    url = "https://graph.facebook.com/" +user_id+ "/posts?fields=likes.limit(1).summary(true)&since="+since+"&access_token="+fb_token
     repond = RestClient.get url
     hash = JSON.parse respond  
     hash["data"].each do |x|
