@@ -54,7 +54,7 @@ class Influence
     Influence.basicFacebookData(user_id,graph)
     user = User.find_by(user_uid: user_id)
     #Calculate influence
-    likes = Influence.getWeeklyLikes(user_id, fb_user.fb_token,graph)
+    likes = Influence.getWeeklyLikes(user_id, user.fb_token,graph)
     likes_per_day = likes/7.to_f
 
 
@@ -143,11 +143,11 @@ class Influence
   end
 
 
-  def self.getWeeklyLikes(user_id, fb_id, fb_token,graph)
+  def self.getWeeklyLikes(user_id,fb_token,graph)
   	since = (Time.now - 7.days).to_i
   	count = 0
     url = "https://graph.facebook.com/" +user_id+ "/posts?fields=likes.limit(1).summary(true)&since="+since+"&access_token="+fb_token
-    repond = RestClient.get url
+    respond = RestClient.get url
     hash = JSON.parse respond  
     hash["data"].each do |x|
       if !x["likes"].nil?
