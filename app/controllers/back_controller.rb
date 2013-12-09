@@ -29,6 +29,22 @@ class BackController < ApplicationController
 		render :status => 200, :json=>{:status => "ok"}
 	end
 
-	def getoffers
+	#curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"cupon_id":"ae4d6084ab064fac982fb608cbd9bd1aa4c4b77a32a5a652f947e05b8b0a3e13"}' http://coupon.thanxup.com/api/share.json
+	def getoffer
+		venue_id = params[:venue_id]
+	    offer = Venue.find_by(venue_id: venue_id).offers.first
+	    if offer.nil?
+	      render :status =>200, :json=> {:status => "0"}
+	    else
+	    render :status =>200, :json=> offer.getOffer
+	   	end
 	end
+
+	def setoffer
+		Offer.setOffer(params)
+		render :status =>200, :json=> {:status => Offer.setOffer(params)}
+	end
+
+
+
 end

@@ -12,7 +12,7 @@ class CuponTemplate
   field :valid_until, type: DateTime
 
 
-#SHARABLE/ CONSUMIBLE / INDIVIDUAL
+#IND/ SHA
   field :kind, type: String  
 
 # Sharable information
