@@ -40,6 +40,16 @@ class BackController < ApplicationController
 	   	end
 	end
 
+	def deleteoffer
+		venue_id = params[:venue_id]
+		offer = Venue.find_by(venue_id: venue_id).offers.first
+		if offer.nil?
+	      render :status =>200, :json=> {:status => "1"}
+	    else
+	      Venue.find_by(venue_id: venue_id).offers.first.delete
+	      render :status =>200, :json=> {:status => "1"}
+	   	end
+	end
 	def setoffer
 		Offer.setOffer(params)
 		render :status =>200, :json=> {:status => Offer.setOffer(params)}

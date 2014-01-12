@@ -25,6 +25,7 @@ ThanxupApi::Application.routes.draw do
   match '/back/notifycupon' => 'back#notifycupon'
   match '/back/getoffer' => 'back#getoffer'
   match '/back/setoffer' => 'back#setoffer'
+  match '/back/deleteoffer' => 'back#deleteoffer'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

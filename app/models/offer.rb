@@ -27,7 +27,6 @@ class Offer
   field :social_until, type: DateTime, default: ""
   belongs_to :venue
 
-
   def getOffer
     if self.offer_kind == "1"
       offer_respond = {
@@ -39,11 +38,11 @@ class Offer
       :discount_thing => self.discount_thing,
       :kind => self.kind,
       :cupon_text => self.cupon_text,
-      :cupon_valid_from => self.cupon_valid_from,
-      :cupon_valid_until => self.cupon_valid_until,
+      :cupon_valid_from => self.cupon_valid_from.strftime("%d-%m-%Y"),
+      :cupon_valid_until => self.cupon_valid_until.strftime("%d-%m-%Y"),
       :social_text => self.social_text,
-      :social_from => self.social_from,
-      :social_until => self.social_until
+      :social_from => self.social_from.strftime("%d-%m-%Y"),
+      :social_until => self.social_until.strftime("%d-%m-%Y")
       }
     elsif self.offer_kind == "2"
       offer_respond = {
@@ -54,11 +53,11 @@ class Offer
       :gift_min_inf => self.gift_min_inf,
       :kind => self.kind,
       :cupon_text => self.cupon_text,
-      :cupon_valid_from => self.cupon_valid_from,
-      :cupon_valid_until => self.cupon_valid_until,
+      :cupon_valid_from => self.cupon_valid_from.strftime("%d-%m-%Y"),
+      :cupon_valid_until => self.cupon_valid_until.strftime("%d-%m-%Y"),
       :social_text => self.social_text,
-      :social_from => self.social_from,
-      :social_until => self.social_until
+      :social_from => self.social_from.strftime("%d-%m-%Y"),
+      :social_until => self.social_until.strftime("%d-%m-%Y")
       }
     end
     return offer_respond.to_json
@@ -72,30 +71,34 @@ class Offer
     new_offer.fb_post = params["fb_post"]
     if params["offer_kind"] == "1"
       new_offer.offer_text = "Hasta " + (params["discount_max"].to_f*100.0).round.to_s + " de descuento en " + params["discount_thing"] + " segun tu influencia"
-      new_offer.discount_max = params["discount_max"].to_f
+      new_offer.discount_max = (params["discount_max"].to_f)/10.0
       new_offer.discount_thing = params["discount_thing"]
     elsif params["offer_kind"] == "2"
       if params["gift_thing"].include?("gratis")
-        new_offer.offer_text = params["gift_thing"] + " a partir de " + (params["gift_min_inf"].to_f*100.0).round.to_s  + " de influencia"
+        new_offer.offer_text = params["gift_thing"] + " a partir de " + params["gift_min_inf"] + " de influencia"
         new_offer.cupon_text = params["gift_thing"]
       else
         new_offer.offer_text = params["gift_thing"] + " gratis" + " a partir de " + (params["gift_min_inf"].to_f*100.0).round.to_s  + " de influencia"
         new_offer.cupon_text = params["gift_thing"] + " gratis"
       end
-      new_offer.gift_min_inf = params["gift_min_inf"]
+      new_offer.gift_min_inf = (params["gift_min_inf"].to_f)/10.0
       new_offer.gift_thing = params["gift_thing"]
     end
-    new_offer.cupon_valid_from = Time.parse(params["cupon_valid_from"]).utc
-    new_offer.cupon_valid_until = Time.parse(params["cupon_valid_until"]).utc
+
+    new_offer.cupon_valid_from = (params["cupon_valid_from"].to_datetime + 1.day - 1.second).utc
+    new_offer.cupon_valid_until = (params["cupon_valid_until"].to_datetime + 1.day - 1.second).utc
     if params["social"] == "0"
       new_offer.kind = "IND"
+      # need to set dummy years for strftimes format in GET
+      new_offer.social_from = (DateTime.now - 200.years).utc
+      new_offer.social_until = (DateTime.now - 200.years).utc
     elsif params["social"]  == "1"
       new_offer.kind = "SHA"
       new_offer.social_count = 0
       new_offer.social_limit = 3
       new_offer.social_text = params["social_text"]
-      new_offer.social_from = Time.parse(params["social_from"]).utc
-      new_offer.social_until = Time.parse(params["social_until"]).utc
+      new_offer.social_from = (params["social_from"].to_datetime + 1.day - 1.second).utc
+      new_offer.social_until = (params["social_until"].to_datetime + 1.day - 1.second).utc
     end
     venue.offers.push(new_offer)
     status = venue.save
@@ -104,9 +107,9 @@ class Offer
       if !offer.nil?
         offer.delete
       end
-      return "Nueva oferta guardada"
+      return "1"
     else
-      return "Ha habido un error, vuelve a intentarlo"
+      return "0"
     end
 
   end
