@@ -74,7 +74,7 @@ class Influence
     if (user.weeklies.count == 0)
       user.weeklies.push(Weekly.new)
       #0.7 to reduce a little bit original influence
-      inf = 0.75*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
+      inf = 0.70*(weighted_likes*0.35 + 0.0*0.25 +weighted_tags*0.25 + weighted_friends*0.15) 
       inf = inf.to_f
       user.influence = inf
       user.save
@@ -146,7 +146,7 @@ class Influence
   def self.getWeeklyLikes(user_id,fb_token,graph)
   	since = (Time.now - 7.days).to_i
   	count = 0
-    url = "https://graph.facebook.com/" +user_id+ "/posts?fields=likes.limit(1).summary(true)&since="+since+"&access_token="+fb_token
+    url = "https://graph.facebook.com/" +user_id+ "/posts?fields=likes.limit(1).summary(true)&since="+since.to_s+"&access_token="+fb_token
     respond = RestClient.get url
     hash = JSON.parse respond  
     hash["data"].each do |x|

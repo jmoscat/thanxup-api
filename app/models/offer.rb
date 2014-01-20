@@ -70,29 +70,29 @@ class Offer
     new_offer.offer_kind = params["offer_kind"]
     new_offer.fb_post = params["fb_post"]
     if params["offer_kind"] == "1"
-      new_offer.offer_text = "Hasta " + (params["discount_max"].to_f*100.0).round.to_s + " de descuento en " + params["discount_thing"] + " segun tu influencia"
-      new_offer.discount_max = (params["discount_max"].to_f)/10.0
+      new_offer.offer_text = "Hasta " + (params["discount_max"].to_f).round.to_s + "% de descuento en " + params["discount_thing"].downcase + " segun tu influencia"
+      new_offer.discount_max = (params["discount_max"].to_f)/100.0
       new_offer.discount_thing = params["discount_thing"]
     elsif params["offer_kind"] == "2"
       if params["gift_thing"].include?("gratis")
-        new_offer.offer_text = params["gift_thing"] + " a partir de " + params["gift_min_inf"] + " de influencia"
+        new_offer.offer_text = params["gift_thing"] + " a partir de " + params["gift_min_inf"] + "% de influencia"
         new_offer.cupon_text = params["gift_thing"]
       else
-        new_offer.offer_text = params["gift_thing"] + " gratis" + " a partir de " + (params["gift_min_inf"].to_f*100.0).round.to_s  + " de influencia"
+        new_offer.offer_text = params["gift_thing"] + " gratis" + " a partir de " + (params["gift_min_inf"].to_f).round.to_s  + "% de influencia"
         new_offer.cupon_text = params["gift_thing"] + " gratis"
       end
-      new_offer.gift_min_inf = (params["gift_min_inf"].to_f)/10.0
+      new_offer.gift_min_inf = (params["gift_min_inf"].to_f)/100.0
       new_offer.gift_thing = params["gift_thing"]
     end
 
     new_offer.cupon_valid_from = (params["cupon_valid_from"].to_datetime + 1.day - 1.second).utc
     new_offer.cupon_valid_until = (params["cupon_valid_until"].to_datetime + 1.day - 1.second).utc
-    if params["social"] == "0"
+    if (params["social"]["1"] == "0") or (params["social"]["2"] == "0")
       new_offer.kind = "IND"
       # need to set dummy years for strftimes format in GET
       new_offer.social_from = (DateTime.now - 200.years).utc
-      new_offer.social_until = (DateTime.now - 200.years).utc
-    elsif params["social"]  == "1"
+      new_offer.social_until = (DateTime.now + 10.years).utc
+    elsif (params["social"]["1"] == "1") or (params["social"]["2"] == "1")
       new_offer.kind = "SHA"
       new_offer.social_count = 0
       new_offer.social_limit = 3
