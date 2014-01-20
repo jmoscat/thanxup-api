@@ -17,7 +17,7 @@ class ProfileDataController < ApplicationController
   end
 
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"Jqomaqibzs1iBHN2FE3N", "altitude":"12.3452", "longitude":"121312"}' http://localhost:3000/getvenue.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"4xAB3g4NZ13UAsK4yWK7", "altitude":"40.474224", "longitude":"-3.720311"}' http://new2010.es:3000/getvenue.json
 
 	def getVenue
 		lat = params[:altitude]
