@@ -17,11 +17,12 @@ class ProfileDataController < ApplicationController
   end
 
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"4xAB3g4NZ13UAsK4yWK7", "altitude":"40.474224", "longitude":"-3.720311"}' http://new2010.es:3000/getvenue.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"pEa3Wp2nQmJs1RCoxQq5", "altitude":"40.474224", "longitude":"-3.720311"}' http://localhost:3000/getvenue.json
 
 	def getVenue
 		lat = params[:altitude]
 		lon = params[:longitude]
+    PlaceSave.perform_async(current_user.user_uid,lat, lon)
 		render :status =>200, :json=> Venue.getClosestVenues(lat,lon)
  	end
 
@@ -30,9 +31,9 @@ class ProfileDataController < ApplicationController
     venue_id = params[:venue_id]
     if current_user.saveVisit(venue_id)
       VenueSavevisit.perform_async(current_user.user_uid, venue_id)
-      render :status =>200, :json=> {:status => "Compartido! Thanx :)"}
+      render :status =>200, :json=> {:status => "Compartido! En breves recibiras un cupon!"}
     else 
-      render :status =>200, :json=> {:status => "Ya has hecho checkin hoy..."}
+      render :status =>200, :json=> {:status => "Hoy ya has hecho checkin..."}
     end
   end
 

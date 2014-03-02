@@ -27,6 +27,9 @@ class User
   field :influence, type: Float
   field :iphone_id, type: String # for push notifications
   field :android_id, type: String # for push notifications
+
+  field :device, type: String, default: ""
+  field :lang, type: String, default: "es"
   #field :consumed_friends_cupons_overall, type: Integer
   #field :consumed_frined_cupons_week, type: Integer
   #field :weekly_shares, type:Integer
@@ -48,7 +51,7 @@ class User
   attr_accessible :uid, :fb_access_token, :remember_me
   
 
-  def self.create_new(fb_uid, fb_token, iphone_token)
+  def self.create_new(fb_uid, fb_token, iphone_token,device, lang)
   	graph = Koala::Facebook::API.new(fb_token)
   	profile = graph.get_object("me")
 
@@ -59,8 +62,14 @@ class User
   		new_user.user_uid = fb_uid
       new_user.iphone_id = iphone_token
   		new_user.fb_token = fb_token
+      if !(device.nil? or lang.nil?)
+        new_user.device = device
+        new_user.lang = lang
+      else
+        new_user.device = "ios"
+        new_user.lang = "es"
+      end
   		new_user.save
-
       #gets all Facebook data and calculates influence async
       #FacebookData.perform_async(new_user.user_uid)
       Influence.update_info_recal_influence(new_user.user_uid)
