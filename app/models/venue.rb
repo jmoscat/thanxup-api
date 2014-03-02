@@ -10,6 +10,7 @@ class Venue
   field :place_id, type: String, default: ""
   field :contact_name, type: String, default: ""
   field :email, type: String, default: ""
+  field :venue_tag, type: String, default:""
   # 0: cafe, 1:copas, 2:restaurante, 3 cine, 4 man-clothing, 5 woman clothing 
   field :kind, type: String, default: ""  #Copas, comida, etc...
   field :passcode, type: String, default: ""
@@ -44,6 +45,7 @@ class Venue
       venue_respond << {
         :venue_id => u.venue_id, 
         :venue_name => u.name, 
+        :venue_tag => u.venue_tag,
         :venue_web => u.web,
         :venue_kind => u.kind,
         :venue_icon => u.image_link,
@@ -52,10 +54,8 @@ class Venue
         :lat => u.location[0], 
         :lon => u.location[1], 
         :offer_text => text,
-        :kind => u.kind,
         :time => u.time,
-        :telf => u.telf,
-        :address => u.address
+        :telf => u.telf
       }
     end
     return venue_respond.to_json

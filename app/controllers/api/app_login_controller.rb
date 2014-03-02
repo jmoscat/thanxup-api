@@ -2,7 +2,7 @@ class Api::AppLoginController < ApplicationController
   skip_before_filter :verify_authenticity_token
   respond_to :json
 
-    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"100006635107958", "iphone_token":"TUP16A8A43A75E64C47B712AB29F03AAB97","fb_access_token":"CAACEdEose0cBACRxZCnGCYnu6vmrPfbMG7h1QiaqcPjVxZAZBmNx0oThnZCP6vgUTWZAZBghkueJMhTnpnb9ZB9NcHKKP7WqebfPtNb51m9ZAUiX7xVZAQ2jpNr4AUDJ1cMu0dcRgXRZCgivKZAwTLAV0MuzsUOaSRwzCyhxdgIcZCUjjyqZAr5IQem595sqv4Q3wxsAZD"}' http://localhost:3000/api/app_login.json
+    #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"545887286","lang":"en", "device":"and" ,"iphone_token":"TUP16A8A43A75E64C47B712AB29F03AAB97","fb_access_token":"CAACEdEose0cBALpocmavNTZBoaQVD4PfLVJAbyGBRSXpTqwzjutv9yeMgSwb6O5igEd2fSkLZBQRshwVmxnsvxdL3huUx6sPZAKBz1Yytd50uKb6kjL7MApyeZAeN3U5xdIyzQPGgAZBrZAjEiTptCpdxrdDIsvPqRwyZANb5Xm6npZCHDnaafxhBVwXqyAD9G8ZD"}' http://localhost:3000/api/app_login.json
     #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"uid":"100005420705218","fb_access_token":"AAACEdEose0cBAJZCx4z04AlUM3TC3TK07Xr9wqqJbIAANqTimpKfDnO6KXp6ArtapQMWmuM51SZCV4T1b5JT2mfuTh99efnZBTiqeagr0oZCR74Y0hGV"}' http://localhost:3000/api/app_login.json
 
 
@@ -32,7 +32,7 @@ class Api::AppLoginController < ApplicationController
     @user=User.find_by(user_uid: uid.downcase)
 
     if @user.nil? #if USER is new
-      @user = User.create_new(uid, fb_access_token,iphone_token)
+      @user = User.create_new(uid, fb_access_token,iphone_token, params[:device], params[:lang])
       if @user.nil? #access_token failed or UID was not valid (user is not created)
         logger.info("Failed to create user, uid not valid")
         render :status=>401, :json=>{:message=>"Failed to create user, uid not valid"}
