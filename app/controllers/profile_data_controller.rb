@@ -2,7 +2,7 @@ class ProfileDataController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"BLFRs8BwQM4DzzUhyKGG"}' http://new2010.es:3000/getinfluence.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"pEa3Wp2nQmJs1RCoxQq5"}' http://localhost:3000/getinfluence.json
 
   def getInfluence
     #x = current_user.login_times+1 
@@ -12,8 +12,15 @@ class ProfileDataController < ApplicationController
   	#@user.update_info_recal_influence #delete after trials
     #influence = (@user.weeklys.last.influence*100).round
     current_user.logintimes
+    stats = current_user.weeklies.last
+    previous_inf = current_user.weeklies.offset(1).last
     influence = (current_user.influence*100.0).round
-    render :status=>200, :json=>{:influence=> influence}
+    if !previous_inf.nil?
+      change =  "+" + (influence - previous_inf.influence).to_s
+    else
+      change = "0"
+    end
+    render :status=>200, :json=>{:influence=> influence, :cupons => stats.new_cupons, :shared => stats.shared_cupons, :change => change }
   end
 
 
