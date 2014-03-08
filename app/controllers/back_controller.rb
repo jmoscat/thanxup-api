@@ -25,6 +25,7 @@ class BackController < ApplicationController
 
 	def notifycupon
 		user = User.find_by(user_uid: params[:user_id])
+		user.weeklies.ascending(:created_at).last.addcupon
 		Notification.cupon_notify(user.iphone_id)
 		render :status => 200, :json=>{:status => "ok"}
 	end
