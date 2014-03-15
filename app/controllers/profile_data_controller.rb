@@ -2,7 +2,7 @@ class ProfileDataController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"pEa3Wp2nQmJs1RCoxQq5"}' http://localhost:3000/getinfluence.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d '{"auth_token":"KV7bgfUkUoLkxUVxrqm9"}' http://new2010.es:3000/getinfluence.json
 
   def getInfluence
     #x = current_user.login_times+1 
@@ -16,7 +16,7 @@ class ProfileDataController < ApplicationController
     previous_inf = current_user.weeklies.offset(1).last
     influence = (current_user.influence*100.0).round
     if !previous_inf.nil?
-      change =  "+" + (influence - previous_inf.influence).to_s
+      change =  "+" + ((influence - previous_inf.influence).round).to_s + "%"
     else
       change = "0"
     end
@@ -24,7 +24,7 @@ class ProfileDataController < ApplicationController
   end
 
 
-  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"pEa3Wp2nQmJs1RCoxQq5", "altitude":"40.474224", "longitude":"-3.720311"}' http://localhost:3000/getvenue.json
+  #curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"auth_token":"HpW9f2xstgBEzz9p1BxK", "altitude":"40.474224", "longitude":"-3.720311"}' http://new2010.es:3000/getvenue.json
 
 	def getVenue
 		lat = params[:altitude]
